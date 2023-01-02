@@ -299,7 +299,7 @@
 
 "@remix-run/router@1.2.1":
   version "1.2.1"
-  resolved "https://registry.npmmirror.com/@remix-run/router/-/router-1.2.1.tgz#812edd4104a15a493dda1ccac0b352270d7a188c"
+  resolved "https://registry.npmmirror.com/@remix-run/router/-/router-1.2.1.tgz"
   integrity sha512-XiY0IsyHR+DXYS5vBxpoBe/8veTeoRpMHP+vDosLZxL5bnpetzI0igkxkLZS235ldLzyfkxF+2divEwWHP3vMQ==
 
 "@types/blueimp-md5@^2.18.0":
@@ -863,7 +863,7 @@ react-refresh@^0.14.0:
 
 react-router-dom@^6.6.1:
   version "6.6.1"
-  resolved "https://registry.npmmirror.com/react-router-dom/-/react-router-dom-6.6.1.tgz#1b96ec0b2cefa7319f1251383ea5b41295ee260d"
+  resolved "https://registry.npmmirror.com/react-router-dom/-/react-router-dom-6.6.1.tgz"
   integrity sha512-u+8BKUtelStKbZD5UcY0NY90WOzktrkJJhyhNg7L0APn9t1qJNLowzrM9CHdpB6+rcPt6qQrlkIXsTvhuXP68g==
   dependencies:
     "@remix-run/router" "1.2.1"
@@ -871,7 +871,7 @@ react-router-dom@^6.6.1:
 
 react-router@6.6.1:
   version "6.6.1"
-  resolved "https://registry.npmmirror.com/react-router/-/react-router-6.6.1.tgz#17de6cf285f2d1c9721a3afca999c984e5558854"
+  resolved "https://registry.npmmirror.com/react-router/-/react-router-6.6.1.tgz"
   integrity sha512-YkvlYRusnI/IN0kDtosUCgxqHeulN5je+ew8W+iA1VvFhf86kA+JEI/X/8NqYcr11hCDDp906S+SGMpBheNeYQ==
   dependencies:
     "@remix-run/router" "1.2.1"
@@ -906,6 +906,11 @@ regenerator-runtime@^0.13.11:
   version "0.13.11"
   resolved "https://registry.npmmirror.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+
+reset-css@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.npmmirror.com/reset-css/-/reset-css-5.0.1.tgz#1ced0604fdb6836567e40d82de3537afaf3bb4c8"
+  integrity sha512-VyuJdNFfp5x/W6e5wauJM59C02Vs0P22sxzZGhQMPaqu/NGTeFxlBFOOw3eq9vQd19gIDdZp7zi89ylyKOJ33Q==
 
 resolve@^1.22.1:
   version "1.22.1"

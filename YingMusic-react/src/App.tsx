@@ -1,13 +1,13 @@
-import React from "react";
-import { useRoutes, useLocation, useNavigate } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
+import Header from "./components/Header";
 import router from "./router";
 
-const outlet = useRoutes(router);
-
 function App() {
+  //const outlet = useRoutes(router);
   return (
-    <div>
-      {outlet}
+    <div style={{ background: "#ccc " }}>
+      <Header />
+      {/* {outlet} */}
       App
     </div>
   );
