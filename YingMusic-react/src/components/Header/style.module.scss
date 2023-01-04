@@ -116,9 +116,10 @@ header {
       border-radius: 8px;
       width: 200px;
 
-      img {
+      .searchIcon {
         height: 15px;
         width: 15px;
+        font-size: 15px;
         color: var(--color-text);
         opacity: 0.28;
 
@@ -144,7 +145,7 @@ header {
       background: var(--color-secondary-bg-for-transparent);
 
       input,
-      img {
+      .searchIcon {
         opacity: 1;
         color: var(--color-primary);
       }
