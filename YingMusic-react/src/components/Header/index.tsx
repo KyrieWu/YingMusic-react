@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import ContextMenu from "../ContextMenu";
+import React, { useState, useRef } from "react";
+import ContextMenu, { IProps } from "../ContextMenu";
 import {
   SearchOutlined,
   LoginOutlined,
@@ -13,6 +13,7 @@ import { useLocation } from "react-router-dom";
 const Header: React.FC = () => {
   const location = useLocation();
   const [inputFocus, setInputFocus] = useState(false);
+  const contextMenuRef = useRef<IProps>(null);
 
   // 处理 input 的 onFocus 事件
   const focusHandler = () => {
@@ -22,6 +23,16 @@ const Header: React.FC = () => {
   // 处理 input 的 onBlur 事件
   const blurHandler = () => {
     setInputFocus(false);
+  };
+
+  const showContextMenu = (event: React.MouseEvent<HTMLImageElement>): void => {
+    if (!contextMenuRef.current?.showMenu) {
+      contextMenuRef.current?.openMenu(event);
+    }
+  };
+
+  const closeContextMenu = () => {
+    contextMenuRef.current?.closeMenu();
   };
 
   return (
@@ -56,10 +67,16 @@ const Header: React.FC = () => {
               <SearchOutlined className={styles.searchIcon} />
             </div>
           </div>
-          <img className={styles.avator} src={loginIcon} alt="" />
+          <img
+            className={styles.avator}
+            src={loginIcon}
+            alt="loginIcon"
+            onMouseEnter={showContextMenu}
+            onMouseLeave={closeContextMenu}
+          />
         </div>
       </header>
-      <ContextMenu name="nihao">
+      <ContextMenu ref={contextMenuRef}>
         <div>
           <SettingOutlined />
           设置
