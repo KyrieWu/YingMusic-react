@@ -8,10 +8,11 @@ import {
 } from "@ant-design/icons";
 import loginIcon from "@/assets/icons/login.png";
 import styles from "./style.module.scss";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link, useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
   const location = useLocation();
+  const navigateTo = useNavigate();
   const [inputFocus, setInputFocus] = useState(false);
   const contextMenuRef = useRef<IProps>(null);
 
@@ -35,18 +36,36 @@ const Header: React.FC = () => {
     contextMenuRef.current?.closeMenu();
   };
 
+  const toHome = () => {
+    navigateTo("/");
+  };
+
   return (
     <div>
-      {"header 组件 "}
       <header>
         <div className={styles.navigation_logo}>
-          <img src="/music.ico" alt="" />
-          <p>YingMusic</p>
+          <img src="/music.ico" alt="" onClick={toHome} />
+          <p onClick={toHome}>YingMusic</p>
         </div>
         <div className={styles.naviagtion_links}>
-          <a className={location.pathname === "/" ? styles.active : ""}>首页</a>
-          <a>发现音乐</a>
-          <a>我的音乐</a>
+          <Link
+            to={"/"}
+            className={location.pathname === "/" ? styles.active : ""}
+          >
+            首页
+          </Link>
+          <Link
+            to={"/discover"}
+            className={location.pathname === "/discover" ? styles.active : ""}
+          >
+            发现音乐
+          </Link>
+          <Link
+            to={"/library"}
+            className={location.pathname === "/library" ? styles.active : ""}
+          >
+            我的音乐
+          </Link>
         </div>
         <div className={styles.right_part}>
           <div className={styles.search_box}>

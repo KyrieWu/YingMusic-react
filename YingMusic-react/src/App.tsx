@@ -1,14 +1,14 @@
-import { useRoutes } from "react-router-dom";
+import { useEffect } from "react";
+import { useRoutes, useNavigate, Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import router from "./router";
 
 function App() {
-  //const outlet = useRoutes(router);
+  const outlet = useRoutes(router);
   return (
-    <div style={{ background: "#ccc " }}>
+    <div className="App">
       <Header />
-      {/* {outlet} */}
-      App
+      {outlet}
     </div>
   );
 }
