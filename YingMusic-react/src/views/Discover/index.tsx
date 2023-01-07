@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./style.module.scss";
 
-const Discover = () => {
-  return <div className={styles.discover}>Discover</div>;
+const Discover: React.FC = () => {
+  return <div className={styles.discover_container}>Discover</div>;
 };
 
 export default Discover;

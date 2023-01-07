@@ -2,7 +2,6 @@ import React, {
   ReactNode,
   useState,
   forwardRef,
-  useRef,
   useImperativeHandle,
 } from "react";
 import styles from "./style.module.scss";

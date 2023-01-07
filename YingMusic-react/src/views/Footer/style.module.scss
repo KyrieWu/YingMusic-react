@@ -1,0 +1,28 @@
+@media (max-width: 1500px) {
+  footer {
+    min-width: 1487px;
+  }
+}
+footer {
+  width: 100vw;
+  height: 10rem;
+  background-color: #f9f9f9;
+  color: rgba(60, 60, 60, 0.7);
+  font-size: 1.4rem;
+  text-align: center;
+  padding-top: 2rem;
+
+  p {
+    margin-top: 1.5rem;
+  }
+
+  a {
+    font-size: 1.6rem;
+    color: var(--color-text);
+
+    &:hover {
+      text-decoration: none;
+      color: rgba(60, 60, 60, 0.7);
+    }
+  }
+}

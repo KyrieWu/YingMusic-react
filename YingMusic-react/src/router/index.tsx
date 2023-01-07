@@ -12,10 +12,6 @@ const withLoadingComponent = (comp: JSX.Element) => {
 };
 
 const routes = [
-  // {
-  //   path: "/",
-  //   element: <Navigate to="/home" />,
-  // },
   {
     path: "*",
     element: <Navigate to="/" />,

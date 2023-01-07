@@ -41,7 +41,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div>
+    <>
       <header>
         <div className={styles.navigation_logo}>
           <img src="/music.ico" alt="" onClick={toHome} />
@@ -109,7 +109,7 @@ const Header: React.FC = () => {
           退出登录
         </div>
       </ContextMenu>
-    </div>
+    </>
   );
 };
 
