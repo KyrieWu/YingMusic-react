@@ -117,9 +117,9 @@ header {
       width: 200px;
 
       .searchIcon {
-        height: 15px;
-        width: 15px;
-        font-size: 15px;
+        height: 18px;
+        width: 18px;
+        font-size: 18px;
         color: var(--color-text);
         opacity: 0.28;
 
@@ -158,6 +158,13 @@ header {
     margin-left: 12px;
     vertical-align: -7px;
     border-radius: 50%;
+    cursor: pointer;
+    display: inline-block;
+  }
+
+  .translate {
+    margin-left: 20px;
+    text-align: center;
     cursor: pointer;
   }
 }

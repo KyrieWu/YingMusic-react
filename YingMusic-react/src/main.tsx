@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+
 import "reset-css";
 import "@/assets/styles/global.scss";
+// 引入国际化解决方案
+import "@/locale";
 import App from "./App";
 
 // 路由

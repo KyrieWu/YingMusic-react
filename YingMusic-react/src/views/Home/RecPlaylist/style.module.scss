@@ -4,8 +4,6 @@
 
 .recPlaylist_container {
   height: 80rem;
-  background: url(https://y.qq.com/ryqq/static/media/bg_detail.bb32b2d1.jpg?max_age=2592000)
-    50% 0 repeat-x;
 
   padding: {
     left: 10vw;
@@ -21,6 +19,7 @@
     h2 {
       line-height: 7rem;
       font-size: 2.5rem;
+      font-weight: 600;
       color: var(--color-text);
     }
   }

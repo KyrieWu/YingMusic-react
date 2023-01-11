@@ -3,8 +3,10 @@ import SquareItemList from "@/components/SquareItemList";
 import styles from "./style.module.scss";
 import { getRecPlayList, getReccategoryPlayList } from "@/apis/playlist";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const RecPlaylist: React.FC = () => {
+  const { t } = useTranslation();
   const [catTag, setCatTag] = useState("");
   const navList = ["华语", "流行", "摇滚", "民谣", "电子"];
   let [playListData, setPlayListData] = useState<
@@ -62,7 +64,7 @@ const RecPlaylist: React.FC = () => {
   return (
     <div className={styles.recPlaylist_container}>
       <div className={styles.recPlaylist_head}>
-        <h2>推荐歌单</h2>
+        <h2>{t("home.recommendPlaylist")}</h2>
       </div>
       <div className={styles.recPlaylist_nav}>
         <a
@@ -83,7 +85,7 @@ const RecPlaylist: React.FC = () => {
           );
         })}
         <div className={styles.showAll}>
-          <Link to={"/allPlayList"}>查看全部</Link>
+          <Link to={"/allPlayList"}>{t("home.seeMore")}</Link>
         </div>
       </div>
       <div className={styles.recPlaylist_content}>

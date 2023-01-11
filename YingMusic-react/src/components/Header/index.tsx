@@ -1,20 +1,27 @@
 import React, { useState, useRef } from "react";
 import ContextMenu, { IProps } from "../ContextMenu";
+import { useTranslation } from "react-i18next";
+import { Switch } from "antd";
 import {
   SearchOutlined,
   LoginOutlined,
-  SettingOutlined,
   LogoutOutlined,
+  TranslationOutlined,
+  SmileFilled,
+  UserOutlined,
 } from "@ant-design/icons";
 import loginIcon from "@/assets/icons/login.png";
 import styles from "./style.module.scss";
 import { useLocation, Link, useNavigate } from "react-router-dom";
+import { changeAppearance } from "@/utils/common";
 
 const Header: React.FC = () => {
   const location = useLocation();
   const navigateTo = useNavigate();
   const [inputFocus, setInputFocus] = useState(false);
   const contextMenuRef = useRef<IProps>(null);
+  const transContextRef = useRef<IProps>(null);
+  const { t, i18n } = useTranslation();
 
   // 处理 input 的 onFocus 事件
   const focusHandler = () => {
@@ -36,8 +43,35 @@ const Header: React.FC = () => {
     contextMenuRef.current?.closeMenu();
   };
 
+  const showTransContextMenu = (
+    event: React.MouseEvent<HTMLDivElement>
+  ): void => {
+    if (!transContextRef.current?.showMenu) {
+      transContextRef.current?.openMenu(event);
+    }
+  };
+
+  const closeTransContextMenu = () => {
+    transContextRef.current?.closeMenu();
+  };
+
   const toHome = () => {
     navigateTo("/");
+  };
+
+  const changLangToZH = () => {
+    i18n.changeLanguage("zh");
+  };
+  const changLangToEN = () => {
+    i18n.changeLanguage("en");
+  };
+
+  const changeTheme = (checked: boolean) => {
+    if (checked) {
+      changeAppearance("light");
+    } else {
+      changeAppearance("dark");
+    }
   };
 
   return (
@@ -52,19 +86,19 @@ const Header: React.FC = () => {
             to={"/"}
             className={location.pathname === "/" ? styles.active : ""}
           >
-            首页
+            {t("header.home")}
           </Link>
           <Link
             to={"/discover"}
             className={location.pathname === "/discover" ? styles.active : ""}
           >
-            发现音乐
+            {t("header.discover")}
           </Link>
           <Link
             to={"/library"}
             className={location.pathname === "/library" ? styles.active : ""}
           >
-            我的音乐
+            {t("header.profile")}
           </Link>
         </div>
         <div className={styles.right_part}>
@@ -78,7 +112,7 @@ const Header: React.FC = () => {
               <div className={styles.input}>
                 <input
                   type="search"
-                  placeholder="搜索"
+                  placeholder={inputFocus === true ? "" : t("header.search")}
                   onFocus={focusHandler}
                   onBlur={blurHandler}
                 />
@@ -86,28 +120,47 @@ const Header: React.FC = () => {
               <SearchOutlined className={styles.searchIcon} />
             </div>
           </div>
-          <img
+          <UserOutlined
             className={styles.avator}
             src={loginIcon}
             alt="loginIcon"
             onMouseEnter={showContextMenu}
             onMouseLeave={closeContextMenu}
+            style={{ color: "var(--color-text)", fontSize: "28px" }}
+          />
+          <div
+            className={styles.translate}
+            onMouseEnter={showTransContextMenu}
+            onMouseLeave={closeTransContextMenu}
+          >
+            <TranslationOutlined
+              style={{ color: "var(--color-text)", fontSize: "28px" }}
+            />
+          </div>
+          <Switch
+            style={{
+              marginLeft: "20px",
+            }}
+            checkedChildren={<SmileFilled style={{ fontSize: "15px" }} />}
+            unCheckedChildren={<SmileFilled style={{ fontSize: "15px" }} />}
+            defaultChecked
+            onChange={changeTheme}
           />
         </div>
       </header>
       <ContextMenu ref={contextMenuRef}>
         <div>
-          <SettingOutlined />
-          设置
-        </div>
-        <div>
           <LoginOutlined />
-          登录
+          {t("login.login")}
         </div>
         <div>
           <LogoutOutlined />
-          退出登录
+          {t("profile.userProfileMenu.logout")}
         </div>
+      </ContextMenu>
+      <ContextMenu ref={transContextRef}>
+        <div onClick={changLangToEN}>English</div>
+        <div onClick={changLangToZH}>简体中文</div>
       </ContextMenu>
     </>
   );
