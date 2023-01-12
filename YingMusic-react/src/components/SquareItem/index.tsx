@@ -13,7 +13,7 @@ type Props = {
   squareItems: SquareItemProps[];
 };
 
-const SquareItemList: React.FC<Props> = (props: Props) => {
+const SquareItem: React.FC<Props> = (props: Props) => {
   const { squareItems } = props;
   return (
     <div className={styles.content}>
@@ -24,7 +24,7 @@ const SquareItemList: React.FC<Props> = (props: Props) => {
               <div className={styles.playIcon}>
                 <img
                   src="https://y.qq.com/ryqq/static/media/cover_play@2x.53a26efb.png?max_age=2592000"
-                  alt=""
+                  alt="cover"
                 />
               </div>
               <div className={styles.img}>
@@ -58,4 +58,4 @@ const SquareItemList: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default SquareItemList;
+export default SquareItem;

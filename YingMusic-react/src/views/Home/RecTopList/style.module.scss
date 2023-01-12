@@ -1,0 +1,166 @@
+.toplist_container {
+  height: 70rem;
+  // background: url(https://y.qq.com/ryqq/static/media/bg_detail.bb32b2d1.jpg?max_age=2592000) 50% 0 repeat-x;
+  padding: {
+    top: 1rem;
+    left: 10vw;
+    right: 10vw;
+    top: 1rem;
+  }
+
+  .head {
+    width: 100%;
+    height: 12%;
+    text-align: center;
+    position: relative;
+    margin-bottom: 20px;
+
+    h2 {
+      line-height: 7rem;
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+
+    .showAll {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      font-size: 16px;
+      color: var(--color-text);
+
+      a {
+        text-decoration: none;
+
+        &:hover {
+          color: var(--color-primary);
+        }
+      }
+    }
+  }
+
+  .content {
+    width: 100%;
+    height: 88%;
+    display: flex;
+
+    .item {
+      display: block;
+      width: calc(100% / 5);
+      height: 90%;
+      border: 0.1px solid transparent;
+      position: relative;
+      z-index: 0;
+
+      .bg {
+        height: 100%;
+        width: 95%;
+        position: absolute;
+        z-index: -1;
+        border-radius: 1rem;
+      }
+
+      .playIcon {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        z-index: 3;
+        top: 20%;
+        left: 40%;
+        opacity: 0;
+        transform: scale(0.5);
+
+        img {
+          width: 100%;
+          height: 100%;
+          cursor: pointer;
+          object-fit: cover;
+          color: #fff;
+          opacity: 0.8;
+
+          &:hover {
+            opacity: 1;
+          }
+
+          &:active {
+            transform: scale(0.97);
+          }
+        }
+      }
+
+      &:hover {
+        .playIcon {
+          opacity: 1;
+          transform: scale(1);
+          transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+      }
+
+      .line {
+        position: absolute;
+        left: 40%;
+        top: 130px;
+        width: 50px;
+        height: 2px;
+        background-color: #000;
+      }
+
+      .head {
+        position: absolute;
+        top: 50px;
+
+        a {
+          letter-spacing: 5px;
+          font-size: 2.5rem;
+          font-weight: 600;
+          text-decoration: none;
+          color: var(--color-text);
+        }
+      }
+
+      .discription {
+        position: absolute;
+        margin-left: 10px;
+        font-size: 15px;
+        line-height: 20px;
+        font-weight: 500;
+        display: block;
+        z-index: 5;
+        color: var(--color-text);
+        top: 160px;
+
+        li {
+          margin-top: 15px;
+
+          a {
+            text-decoration: none;
+          }
+        }
+      }
+    }
+
+    &::after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+  }
+}
+@media (max-width: 1536px) {
+  .toplist_container {
+    height: 60rem;
+  }
+}
+@media (max-width: 1500px) {
+  .toplist_container {
+    min-width: 1492px;
+  }
+
+  .content {
+    flex: unset;
+  }
+}
+@media (max-width: 1336px) {
+  .recPlaylist_container {
+    padding: 0 5vw;
+  }
+}

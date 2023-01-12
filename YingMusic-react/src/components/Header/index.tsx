@@ -7,8 +7,9 @@ import {
   LoginOutlined,
   LogoutOutlined,
   TranslationOutlined,
-  SmileFilled,
   UserOutlined,
+  BulbOutlined,
+  BulbFilled,
 } from "@ant-design/icons";
 import loginIcon from "@/assets/icons/login.png";
 import styles from "./style.module.scss";
@@ -74,11 +75,15 @@ const Header: React.FC = () => {
     }
   };
 
+  const placeHolder = (): string => {
+    return inputFocus == true ? "" : t("header.search");
+  };
+
   return (
     <>
       <header>
         <div className={styles.navigation_logo}>
-          <img src="/music.ico" alt="" onClick={toHome} />
+          <img src="/music.png" alt="" onClick={toHome} />
           <p onClick={toHome}>YingMusic</p>
         </div>
         <div className={styles.naviagtion_links}>
@@ -112,7 +117,7 @@ const Header: React.FC = () => {
               <div className={styles.input}>
                 <input
                   type="search"
-                  placeholder={inputFocus === true ? "" : t("header.search")}
+                  placeholder={inputFocus ? "" : t("header.search")}
                   onFocus={focusHandler}
                   onBlur={blurHandler}
                 />
@@ -139,10 +144,10 @@ const Header: React.FC = () => {
           </div>
           <Switch
             style={{
-              marginLeft: "20px",
+              marginLeft: "12px",
             }}
-            checkedChildren={<SmileFilled style={{ fontSize: "15px" }} />}
-            unCheckedChildren={<SmileFilled style={{ fontSize: "15px" }} />}
+            checkedChildren={<BulbFilled style={{ fontSize: "15px" }} />}
+            unCheckedChildren={<BulbOutlined style={{ fontSize: "15px" }} />}
             defaultChecked
             onChange={changeTheme}
           />

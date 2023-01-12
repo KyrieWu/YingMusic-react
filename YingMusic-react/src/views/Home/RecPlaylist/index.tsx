@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import SquareItemList from "@/components/SquareItemList";
+import SquareItem from "@/components/SquareItem";
 import styles from "./style.module.scss";
 import { getRecPlayList, getReccategoryPlayList } from "@/apis/playlist";
 import { Link } from "react-router-dom";
@@ -89,7 +89,7 @@ const RecPlaylist: React.FC = () => {
         </div>
       </div>
       <div className={styles.recPlaylist_content}>
-        <SquareItemList squareItems={squareItems} />
+        <SquareItem squareItems={squareItems} />
       </div>
     </div>
   );
