@@ -70,7 +70,7 @@ const RecTopList = () => {
                   {topMusicList
                     .get(name)
                     ?.slice(0, 5)
-                    .map((item) => {
+                    .map((item, index) => {
                       return (
                         <li key={item.id}>
                           <a className={styles.songname}>{item.name}</a>

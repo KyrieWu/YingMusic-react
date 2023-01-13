@@ -6,7 +6,7 @@
 
   .item {
     width: calc(100% / 5);
-    height: 36%;
+    height: 30%;
     margin-bottom: 10rem;
 
     .play {
@@ -47,10 +47,11 @@
           }
         }
       }
+
       .img {
         width: 95%;
-        height: 100%;
-        border-radius: 5%;
+        height: 95%;
+        border-radius: 1rem;
         overflow: hidden;
 
         img {
@@ -69,13 +70,12 @@
 
         .img img {
           box-shadow: 0px 5px 8px 8px rgba(0, 0, 0, 0.1);
-          // transform: scale(1.03);
-          // transition: transform 0.5s ease-in-out;
         }
       }
     }
 
     .discription {
+      margin-top: 0.5rem;
       margin-left: 1rem;
       width: 85%;
       color: var(--color-text);
@@ -90,7 +90,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        margin-top: 1rem;
         margin-bottom: 0.5rem;
 
         &:hover {
@@ -98,18 +97,18 @@
         }
       }
 
-      .publishTime {
-        font-size: 12px;
-        color: var(--color-text);
-        opacity: 0.7;
-      }
-
-      .playcount {
-        font-size: 12px;
+      .playCount {
+        font-size: 1.2rem;
         color: var(--color-text);
         opacity: 0.7;
       }
     }
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
   }
 }
 
@@ -117,10 +116,4 @@
   .item {
     flex: unset;
   }
-}
-
-.content::after {
-  content: "";
-  display: block;
-  clear: both;
 }

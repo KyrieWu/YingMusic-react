@@ -144,7 +144,7 @@ const Header: React.FC = () => {
           </div>
           <Switch
             style={{
-              marginLeft: "12px",
+              marginLeft: "20px",
             }}
             checkedChildren={<BulbFilled style={{ fontSize: "15px" }} />}
             unCheckedChildren={<BulbOutlined style={{ fontSize: "15px" }} />}

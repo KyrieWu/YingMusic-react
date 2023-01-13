@@ -14,6 +14,7 @@
     text-align: center;
     position: relative;
     margin-bottom: 20px;
+    color: var(--color-text);
 
     h2 {
       line-height: 7rem;
@@ -60,12 +61,14 @@
       }
 
       .playIcon {
-        width: 60px;
-        height: 60px;
+        width: 6rem;
+        height: 6rem;
         position: absolute;
         z-index: 3;
-        top: 20%;
-        left: 40%;
+        top: 24%;
+        left: 50%;
+        margin-top: -3rem;
+        margin-left: -3rem;
         opacity: 0;
         transform: scale(0.5);
 
@@ -101,7 +104,7 @@
         top: 130px;
         width: 50px;
         height: 2px;
-        background-color: #000;
+        background-color: var(--color-text);
       }
 
       .head {
@@ -119,7 +122,6 @@
 
       .discription {
         position: absolute;
-        margin-left: 10px;
         font-size: 15px;
         line-height: 20px;
         font-weight: 500;
@@ -127,6 +129,7 @@
         z-index: 5;
         color: var(--color-text);
         top: 160px;
+        left: 30%;
 
         li {
           margin-top: 15px;
