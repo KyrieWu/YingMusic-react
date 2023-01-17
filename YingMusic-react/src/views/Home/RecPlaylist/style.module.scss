@@ -1,75 +1,54 @@
 .active {
-  color: var(--color-primary);
+	color: var(--color-primary);
 }
 
 .recPlaylist_container {
-  height: 80rem;
+	//height: 80rem;
 
-  padding: {
-    top: 1rem;
-    left: 10vw;
-    right: 10vw;
-    top: 1rem;
-  }
+	.recPlaylist_head {
+		padding-top: 1rem;
+		width: 100%;
+		height: 7rem;
+		text-align: center;
 
-  .recPlaylist_head {
-    padding-top: 1rem;
-    width: 100%;
-    height: 9%;
-    text-align: center;
+		h2 {
+			line-height: 7rem;
+			font-size: 2.5rem;
+			font-weight: 600;
+			color: var(--color-text);
+		}
+	}
 
-    h2 {
-      line-height: 7rem;
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: var(--color-text);
-    }
-  }
+	.recPlaylist_nav {
+		width: 100%;
+		height: 5rem;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 500;
+		position: relative;
+		color: var(--color-text);
+		margin-bottom: 10px;
 
-  .recPlaylist_nav {
-    width: 100%;
-    height: 4.5%;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 500;
-    position: relative;
-    color: var(--color-text);
-    margin-bottom: 20px;
+		a {
+			margin: 0 24px;
+			text-decoration: none;
+			line-height: 4rem;
 
-    a {
-      margin: 0 24px;
-      text-decoration: none;
-      line-height: 4rem;
+			&:hover {
+				color: var(--color-primary);
+			}
+		}
 
-      &:hover {
-        color: var(--color-primary);
-      }
-    }
-
-    .showAll {
-      position: absolute;
-      top: 0px;
-      right: 0;
-    }
-  }
-
-  .recPlaylist_content {
-    height: 86.5%;
-    //margin: 0 auto;
-  }
+		.showAll {
+			position: absolute;
+			top: 0px;
+			right: 0;
+		}
+	}
 }
-@media (max-width: 1536px) {
-  .recPlaylist_container {
-    height: 70rem;
-  }
-}
+
 @media (max-width: 1500px) {
-  .recPlaylist_container {
-    min-width: 1492px;
-  }
-}
-@media (max-width: 1336px) {
-  .recPlaylist_container {
-    padding: 0 5vw;
-  }
+	.recPlaylist_container {
+		min-width: 1492px;
+	}
 }
