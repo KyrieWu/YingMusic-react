@@ -22,6 +22,7 @@ const Header: React.FC = () => {
 	const location = useLocation();
 	const navigateTo = useNavigate();
 	const [inputFocus, setInputFocus] = useState(false);
+	const [keyword, setKeyWord] = useState('');
 	const contextMenuRef = useRef<IProps>(null);
 	const transContextRef = useRef<IProps>(null);
 	const { t, i18n } = useTranslation();
@@ -68,10 +69,19 @@ const Header: React.FC = () => {
 	};
 
 	const changeTheme = (checked: boolean) => {
-		if (checked) {
-			changeAppearance('light');
-		} else {
-			changeAppearance('dark');
+		let theme = checked ? 'light' : 'dark';
+
+		changeAppearance(theme);
+		localStorage.setItem('data-theme', theme);
+	};
+
+	const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		setKeyWord(event.currentTarget.value);
+	};
+
+	const toSearch = async (e: React.KeyboardEvent) => {
+		if (e.key === 'Enter') {
+			navigateTo(`/search/${keyword}`);
 		}
 	};
 
@@ -99,9 +109,12 @@ const Header: React.FC = () => {
 							<div className={styles.input}>
 								<input
 									type="search"
-									placeholder={inputFocus ? '' : t('header.search')}
+									placeholder={`${inputFocus ? '' : t('header.search')}`}
+									value={keyword}
+									onChange={e => handleChange(e)}
 									onFocus={focusHandler}
 									onBlur={blurHandler}
+									onKeyDown={e => toSearch(e)}
 								/>
 							</div>
 							<SearchOutlined className={styles.searchIcon} />
@@ -123,8 +136,8 @@ const Header: React.FC = () => {
 						}}
 						checkedChildren={<BulbFilled style={{ fontSize: '15px' }} />}
 						unCheckedChildren={<BulbOutlined style={{ fontSize: '15px' }} />}
-						defaultChecked
 						onChange={changeTheme}
+						defaultChecked={localStorage.getItem('data-theme') === 'dark' ? false : true}
 					/>
 				</div>
 			</header>

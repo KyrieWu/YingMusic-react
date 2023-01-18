@@ -2,7 +2,7 @@
 	//height: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	//justify-content: center;
 
 	.item {
 		width: calc(100% / 5);
@@ -100,6 +100,7 @@
 			}
 
 			.playCount {
+				margin-top: 0.5rem;
 				font-size: 1.2rem;
 				color: var(--color-text);
 				opacity: 0.7;

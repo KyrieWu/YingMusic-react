@@ -62,7 +62,7 @@ const RecMVList: React.FC = () => {
 					);
 				})}
 				<div className={styles.showAll}>
-					<Link to="/allMVList">{t('home.seeMore')}</Link>
+					<Link to="/discover/allMVList">{t('home.seeMore')}</Link>
 				</div>
 			</div>
 			<MVItem mvList={mvList}></MVItem>

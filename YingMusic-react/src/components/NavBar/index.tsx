@@ -23,9 +23,6 @@ const NavBar: React.FC = () => {
 			<Link to="/discover/allMVList" className={location.pathname === '/discover/allMVList' ? styles.active : ''}>
 				MV
 			</Link>
-			<Link to="/discover/allAltumList" className={location.pathname === '/discover/allTopList' ? styles.active : ''}>
-				{t('nav.album')}
-			</Link>
 		</nav>
 	);
 };

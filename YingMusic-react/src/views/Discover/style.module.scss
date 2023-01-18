@@ -1,3 +1,15 @@
 .discover_container {
-  margin-top: 138px;
+	margin-top: 138px;
+	padding: {
+		top: 1rem;
+		left: 10vw;
+		right: 10vw;
+		bottom: 10rem;
+	}
+}
+
+@media (max-width: 1336px) {
+	.discover_container {
+		padding: 0 5vw;
+	}
 }

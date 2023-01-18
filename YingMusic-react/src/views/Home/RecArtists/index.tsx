@@ -26,7 +26,7 @@ const RecArtists: React.FC = () => {
 			<div className={styles.head}>
 				<h2>{t('home.recommendArtist')}</h2>
 				<div className={styles.showAll}>
-					<Link to="/allArtists" style={{ letterSpacing: 'normal' }}>
+					<Link to="/discover/allArtists" style={{ letterSpacing: 'normal' }}>
 						{t('home.seeMore')}
 					</Link>
 				</div>

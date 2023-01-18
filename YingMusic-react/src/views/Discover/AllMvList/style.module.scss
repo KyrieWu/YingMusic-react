@@ -1,0 +1,116 @@
+.allMV_container {
+	.head {
+		width: 100%;
+		position: relative;
+
+		.panel {
+			width: 100%;
+			padding: 1rem;
+
+			//background-color: var(--color-secondary-bg);
+			color: var(--color-text);
+
+			.categorie_content {
+				display: flex;
+
+				.categories {
+					font-size: 24px;
+					font-weight: 700;
+					opacity: 0.68;
+					min-width: 24px;
+					height: 26px;
+				}
+
+				.categories_list {
+					margin-left: 3rem;
+					display: flex;
+					flex-wrap: wrap;
+
+					.item {
+						user-select: none;
+						display: flex;
+						align-items: center;
+						font-weight: 500;
+						font-size: 16px;
+						transition: 0.2s;
+						min-width: 50px;
+						margin-left: 3rem;
+
+						.item_name {
+							display: block;
+							text-align: center;
+							text-decoration: none;
+							border-radius: 10px;
+							padding: 5px;
+							padding-right: 10px;
+
+							&:hover {
+								background-color: var(--color-primary-bg);
+								color: var(--color-primary);
+							}
+
+							&:active {
+								transform: scale(0.98);
+								transition: transform 0.2s;
+							}
+						}
+					}
+
+					.active {
+						color: var(--color-primary);
+						background-color: var(--color-primary-bg);
+					}
+				}
+			}
+		}
+
+		.order_panel {
+			position: absolute;
+			display: flex;
+			right: 0;
+			top: 14rem;
+
+			.order {
+				width: 5rem;
+				height: 3.5rem;
+				border: 1px solid #c9c9c9;
+				font-size: 1.4rem;
+				text-align: center;
+				line-height: 3.5rem;
+				color: var(--color-text);
+				cursor: pointer;
+
+				&:first-child {
+					width: 7rem;
+					border-right: none;
+				}
+
+				&:nth-child(3) {
+					border-left: none;
+				}
+			}
+
+			.active {
+				color: var(--color-primary);
+				background-color: var(--color-primary-bg);
+			}
+		}
+	}
+
+	.content {
+		.title {
+			font-size: 2.5rem;
+			font-weight: 600;
+			color: var(--color-text);
+			margin-left: 1rem;
+			margin-top: 5rem;
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+@media (max-width: 1500px) {
+	.allMV_container {
+		min-width: 1492px;
+	}
+}

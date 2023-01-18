@@ -15,10 +15,12 @@ const RecPlaylist: React.FC = () => {
 	useEffect(() => {
 		getPlayListHandler();
 	}, []);
+	useEffect(() => {
+		getCatPlayListHandler();
+	}, [catTag]);
 
-	const getCatPlayListHandler = async (event: React.MouseEvent<HTMLAnchorElement>) => {
-		const cat = event.currentTarget.text;
-		const result = await getReccategoryPlayList(10, cat, 0);
+	const getCatPlayListHandler = async () => {
+		const result = await getReccategoryPlayList(10, catTag, 0);
 		const playListData = result.playlists;
 		const squareItems: SquareItemProps[] = [];
 		playListData.forEach(item => {
@@ -32,9 +34,6 @@ const RecPlaylist: React.FC = () => {
 			);
 		});
 		setSquareItems(squareItems);
-		setCatTag(cat);
-
-		event.stopPropagation();
 	};
 
 	const getPlayListHandler = async () => {
@@ -62,18 +61,18 @@ const RecPlaylist: React.FC = () => {
 				<h2>{t('home.recommendPlaylist')}</h2>
 			</div>
 			<div className={styles.recPlaylist_nav}>
-				<a className={catTag === '为你推荐' ? styles.active : ''} onClick={getPlayListHandler}>
+				<a className={catTag === '为你推荐' ? styles.active : ''} onClick={() => setCatTag('为你推荐')}>
 					精彩推荐
 				</a>
 				{navList.map(item => {
 					return (
-						<a className={catTag === item ? styles.active : ''} key={item} onClick={getCatPlayListHandler}>
+						<a className={catTag === item ? styles.active : ''} key={item} onClick={() => setCatTag(item)}>
 							{item}
 						</a>
 					);
 				})}
 				<div className={styles.showAll}>
-					<Link to={'/allPlayList'}>{t('home.seeMore')}</Link>
+					<Link to={'/discover/allPlayList'}>{t('home.seeMore')}</Link>
 				</div>
 			</div>
 			<SquareItem squareItems={squareItems} />

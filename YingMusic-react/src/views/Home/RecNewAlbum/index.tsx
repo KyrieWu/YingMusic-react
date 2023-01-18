@@ -60,7 +60,7 @@ const RecNewAlbum: React.FC = () => {
 					name: item.name,
 					artistId: item.artist.id,
 					artistName: item.artist.name,
-					routerPath: '/altumDetail',
+					routerPath: '/albumDetail',
 				})
 			);
 		});
@@ -84,9 +84,9 @@ const RecNewAlbum: React.FC = () => {
 						</a>
 					);
 				})}
-				<div className={styles.showAll}>
+				{/* <div className={styles.showAll}>
 					<Link to="/allAltumList">{t('home.seeMore')}</Link>
-				</div>
+				</div> */}
 			</div>
 			<SquareItem squareItems={squareItems}></SquareItem>
 		</div>

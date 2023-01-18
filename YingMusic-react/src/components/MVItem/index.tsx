@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Img from '../Img';
 import { Link } from 'react-router-dom';
 
 import styles from './style.module.scss';
@@ -21,29 +21,26 @@ const MVItem: React.FC<Props> = (props: Props) => {
 	const { mvList } = props;
 	return (
 		<div className={styles.content}>
-			{mvList.map(item => {
+			{mvList.map((item, index) => {
 				return (
-					<div className={styles.item} key={item.id}>
-						<Link to="{ path: '/mvDetail', query: { id: item.id } }">
+					<div className={styles.item} key={index}>
+						<Link to={`/mvDetail/${item.id} `}>
 							<div className={styles.play}>
 								<div className={styles.playIcon}>
 									<img src="https://y.qq.com/ryqq/static/media/cover_play@2x.53a26efb.png?max_age=2592000" alt="" />
 								</div>
 								<div className={styles.img}>
-									<img src={item.picUrl} alt={item.name} />
+									<Img src={item.picUrl} name={item.name} />
 								</div>
 							</div>
 						</Link>
 
 						<div className={styles.discription}>
-							<Link className={styles.des_title} to="{ path: '/mvDetail', query: { id: item.id } }" title={item.name}>
+							<Link className={styles.des_title} to={`/mvDetail/ ${item.id}`} title={item.name}>
 								{item.name}
 							</Link>
 							{item.artistName && (
-								<Link
-									to="{ path: '/artistDetail', query: { id: item.artistId } }"
-									style={{ fontSize: '12px', opacity: '0.7' }}
-								>
+								<Link to={`/artistDetail/${item.artistId}`} style={{ fontSize: '12px', opacity: '0.7' }}>
 									{item.artistName}
 								</Link>
 							)}

@@ -1,0 +1,78 @@
+.allartists_container {
+	.panel {
+		padding: {
+			top: 1rem;
+			bottom: 1rem;
+		}
+
+		color: var(--color-text);
+
+		.categorie_content {
+			display: flex;
+
+			.categories {
+				font-size: 24px;
+				font-weight: 700;
+				opacity: 0.68;
+				margin-left: 24px;
+				min-width: 24px;
+				height: 26px;
+			}
+
+			.categories_list {
+				margin-left: 24px;
+				display: flex;
+				flex-wrap: wrap;
+
+				.item {
+					user-select: none;
+					display: flex;
+					align-items: center;
+					font-weight: 500;
+					font-size: 16px;
+					transition: 0.2s;
+					min-width: 50px;
+
+					.item_name {
+						display: block;
+						text-align: center;
+						text-decoration: none;
+						border-radius: 10px;
+						padding: 5px;
+
+						&:hover {
+							background-color: var(--color-primary-bg);
+							color: var(--color-primary);
+						}
+
+						&:active {
+							transform: scale(0.98);
+							transition: transform 0.2s;
+						}
+					}
+
+					&:first-child {
+						margin-right: 2.5rem;
+					}
+				}
+
+				.active {
+					color: var(--color-primary);
+					background-color: var(--color-primary-bg);
+				}
+			}
+		}
+	}
+
+	.content {
+		// width: 90%;
+		// margin: 0 auto;
+		margin-top: 5rem;
+	}
+}
+
+@media (max-width: 1500px) {
+	.allplaylist_container {
+		min-width: 1492px;
+	}
+}

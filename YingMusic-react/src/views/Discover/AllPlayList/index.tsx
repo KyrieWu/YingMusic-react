@@ -13,7 +13,6 @@ import styles from './style.module.scss';
 
 const AllPlayList: React.FC = () => {
 	const [squareItems, setSquareItems] = useState<SquareItemProps[]>([]);
-	const show_more = useRef<HTMLDivElement>(null);
 	const [offset, setOffset] = useState<number>(0);
 	const { playListCat } = useSelector((state: RootType) => ({
 		playListCat: state.handlePlayList.playListCat,
@@ -24,7 +23,6 @@ const AllPlayList: React.FC = () => {
 			setOffset(0);
 			setSquareItems([]);
 			getPlayLists();
-			nProgress.start();
 		}
 	}, [playListCat]);
 
@@ -37,6 +35,7 @@ const AllPlayList: React.FC = () => {
 	};
 
 	const getPlayLists = async () => {
+		nProgress.start();
 		const result = (await getReccategoryPlayList(20, playListCat, offset)) as unknown as CatePlayLists;
 		const playListDatas = result.playlists;
 		addSquareItem(playListDatas);
@@ -67,7 +66,7 @@ const AllPlayList: React.FC = () => {
 			<div className={styles.content}>
 				{squareItems.length == 0 ? <SpinPage /> : <SquareItem squareItems={squareItems}></SquareItem>}
 			</div>
-			<div ref={show_more}>{squareItems.length !== 0 && <LoadMore clickHandler={loadMoreSquareItemHandler} />}</div>
+			<div>{squareItems.length !== 0 && <LoadMore clickHandler={loadMoreSquareItemHandler} />}</div>
 		</div>
 	);
 };

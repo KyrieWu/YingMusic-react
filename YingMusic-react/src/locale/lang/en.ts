@@ -237,7 +237,14 @@ export default {
 		needToLogin: 'Need to log into netease account',
 	},
 	songItem: {
+		songName: "Song name",
+		singer: 'Singer',
+		songTime: 'Song time',
+		album: "Album",
 		play: 'Play',
 		add: 'Add to the playlist ',
 	},
+	songListDetail: {
+		similarPlaylist: 'Similar Playlist'
+	}
 };

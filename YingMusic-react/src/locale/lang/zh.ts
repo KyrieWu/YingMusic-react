@@ -236,7 +236,14 @@ export default {
 		needToLogin: '此操作需要登录网易云帐号',
 	},
 	songItem: {
+		songName: "歌曲",
+		singer: '歌手',
+		songTime: '时间',
+		album: "专辑",
 		play: '播放',
 		add: '添加到播放列表',
 	},
+	songListDetail: {
+		similarPlaylist: '相似歌单'
+	}
 };

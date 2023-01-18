@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, useLocation } from 'react-router-dom';
 
 import { changeAppearance } from '@/utils/common';
 
@@ -13,11 +13,12 @@ function App() {
 		changeAppearance('light');
 	}, []);
 	const outlet = useRoutes(router);
+	const location = useLocation();
 	return (
 		<div className="App">
 			<Header />
 			{outlet}
-			<Footer />
+			{location.pathname === '/' && <Footer />}
 		</div>
 	);
 }

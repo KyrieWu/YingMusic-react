@@ -1,20 +1,11 @@
 .allplaylist_container {
-  margin-top: 138px;
-
-  padding: {
-    top: 1rem;
-    left: 10vw;
-    right: 10vw;
-    bottom: 1rem;
-  }
-
-  .content {
-    width: 100%;
-  }
+	.content {
+		width: 100%;
+	}
 }
 
 @media (max-width: 1500px) {
-  .allplaylist_container {
-    min-width: 1492px;
-  }
+	.allplaylist_container {
+		min-width: 1492px;
+	}
 }
