@@ -6,3 +6,19 @@ export function getBanner(): Promise<Banners> {
 		method: 'GET',
 	});
 }
+
+// get daily recommend songs
+export function getDailyRecommendSongs() {
+	return service({
+		url: `/recommend/songs`,
+		method: 'get'
+	})
+}
+
+//get personal FM
+export function getPersonalFm() {
+	return service({
+		url: `/personal_fm`,
+		method: 'get'
+	})
+}

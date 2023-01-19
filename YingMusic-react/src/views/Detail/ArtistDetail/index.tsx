@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SquareItem from '@/components/SquareItem';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { getArtistDetail, getArtistHotSong, getSimitArtist, getArtAlbum, getArtistMV } from '@/apis';
 import { timestampToTime } from '@/utils/utils';
@@ -49,7 +49,6 @@ interface ArtDetailData {
 
 const ArtistDetail: React.FC = () => {
 	const { t } = useTranslation();
-	const navigateTo = useNavigate();
 	const { id } = useParams();
 	const [artistData, setArtistData] = useState({} as ArtDetailData);
 	const [trackInfos, setTrackInfos] = useState<SongInfo[]>([]);
@@ -111,6 +110,19 @@ const ArtistDetail: React.FC = () => {
 		setSquareItems(squareItems);
 	};
 
+	const getImageUrl = (item: any) => {
+		if (item.img1v1Url) {
+			let img1v1ID = item.img1v1Url.split('/');
+			img1v1ID = img1v1ID[img1v1ID.length - 1];
+			if (img1v1ID === '5639395138885805.jpg') {
+				// 没有头像的歌手，网易云返回的img1v1Url并不是正方形的 😅😅😅
+				return 'https://p2.music.126.net/VnZiScyynLG7atLIZ2YPkw==/18686200114669622.jpg?param=512y512';
+			}
+		}
+		let img = item.img1v1Url || item.picUrl || item.coverImgUrl || item.cover;
+		return `${img?.replace('http://', 'https://')}?param=512y512`;
+	};
+
 	// const getsimitArtist = async (id: number) => {
 	// 	if (store.state.isLogin) {
 	// 		let res = (await getSimitArtist(id)) as unknown as SimitArtist;
@@ -122,7 +134,7 @@ const ArtistDetail: React.FC = () => {
 		<div className={styles.artistDetail_container}>
 			<div className={styles.artist_main}>
 				<div className={styles.artist_img}>
-					<img src={artistData.artist?.cover} alt={artistData.artist?.name} />
+					<img src={artistData.artist && getImageUrl(artistData.artist)} alt={artistData.artist?.name} />
 				</div>
 				<div className={styles.artist_detail}>
 					<div className={styles.title}>

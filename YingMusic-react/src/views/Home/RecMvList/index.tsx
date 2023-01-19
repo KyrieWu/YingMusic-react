@@ -4,14 +4,14 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 import { getMVList } from '@/apis/mv';
-import MVItem, { MVProps } from '@/components/MVItem';
+import MVItem from '@/components/MVItem';
 
 import styles from './style.module.scss';
 
 const RecMVList: React.FC = () => {
 	const { t } = useTranslation();
 	const [mvType, setMVType] = useState('');
-	const [mvList, setMVList] = useState<MVProps[]>([]);
+	const [mvList, setMVList] = useState<MVInfo[]>([]);
 	const navList = ['内地', '港台', '欧美', '韩国', '日本'];
 
 	useEffect(() => {
@@ -29,20 +29,9 @@ const RecMVList: React.FC = () => {
 	const getRecMV = async (mvType: string) => {
 		const result = await getMVList(mvType);
 		const mvDatas = result.data;
-		const mvList: MVProps[] = [];
-		mvDatas.forEach(item => {
-			mvList.push(
-				Object.freeze({
-					id: item.id,
-					name: item.name,
-					picUrl: item.cover,
-					artistId: item.artistId,
-					artistName: item.artistName,
-				})
-			);
-		});
+
 		setMVType(mvType);
-		setMVList(mvList);
+		setMVList(mvDatas);
 	};
 
 	return (

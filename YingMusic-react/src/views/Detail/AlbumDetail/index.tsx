@@ -37,11 +37,16 @@ const AlbumDetail: React.FC = () => {
 		nProgress.done();
 	};
 
+	const getImageUrl = (item: any) => {
+		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
+		return `${img?.replace('http://', 'https://')}?param=512y512`;
+	};
+
 	return (
 		<div className={styles.albumDetail_container}>
 			<div className={styles.album_main}>
 				<div className={styles.album_img}>
-					<img src={albumInfo.picUrl} alt={albumInfo.name} />
+					<img src={getImageUrl(albumInfo)} alt={albumInfo.name} />
 				</div>
 				<div className={styles.album_detail}>
 					<div className={styles.title}>
@@ -79,10 +84,6 @@ const AlbumDetail: React.FC = () => {
 						<a className={styles.mod_btn}>
 							<i className={styles.mod_btn__icon_like}></i>
 							<span>收藏</span>
-						</a>
-						<a className={styles.mod_btn}>
-							<i className={styles.mod_btn__icon_commend}></i>
-							<span>评论</span>
 						</a>
 					</div>
 				</div>

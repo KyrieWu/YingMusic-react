@@ -52,11 +52,14 @@
 				height: 100%;
 				border-radius: 5%;
 				overflow: hidden;
+				transition: box-shadow 0.5s ease-in-out;
 
 				img {
 					width: 100%;
 					height: 100%;
 					object-fit: cover;
+					transform: scale(1);
+					transition: transform 0.5s ease-in-out;
 				}
 			}
 
@@ -67,10 +70,13 @@
 					transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
 				}
 
-				.img img {
+				.img {
 					box-shadow: 0px 5px 8px 8px rgba(0, 0, 0, 0.1);
-					// transform: scale(1.03);
-					// transition: transform 0.5s ease-in-out;
+					transition: box-shadow 0.5s ease-in-out;
+					img {
+						transform: scale(1.03);
+						transition: transform 0.5s ease-in-out;
+					}
 				}
 			}
 		}

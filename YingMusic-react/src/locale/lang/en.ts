@@ -2,6 +2,7 @@ export default {
 	common: {
 		play: 'PLAY',
 		songs: 'Songs',
+		switchLang: 'Switch language successfully'
 	},
 	header: {
 		home: 'Home',
@@ -20,6 +21,7 @@ export default {
 		newAlbum: 'Latest Albums',
 		seeMore: 'See More',
 		charts: 'Charts',
+		forYou: 'For you'
 	},
 	profile: {
 		sLibrary: "'s Library",

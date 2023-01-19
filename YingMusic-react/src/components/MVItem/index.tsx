@@ -1,5 +1,4 @@
 import React from 'react';
-import Img from '../Img';
 import { Link } from 'react-router-dom';
 
 import styles from './style.module.scss';
@@ -14,11 +13,16 @@ export interface MVProps {
 }
 
 type Props = {
-	mvList: MVProps[];
+	mvList: MVInfo[] | MVProps[];
 };
 
 const MVItem: React.FC<Props> = (props: Props) => {
 	const { mvList } = props;
+	const getImageUrl = (mv: any) => {
+		let url = mv.imgurl16v9 ?? mv.cover ?? mv.coverUrl ?? mv.picUrl;
+		return url?.replace('http://', 'https://') + '?param=464y260';
+	};
+
 	return (
 		<div className={styles.content}>
 			{mvList.map((item, index) => {
@@ -30,7 +34,7 @@ const MVItem: React.FC<Props> = (props: Props) => {
 									<img src="https://y.qq.com/ryqq/static/media/cover_play@2x.53a26efb.png?max_age=2592000" alt="" />
 								</div>
 								<div className={styles.img}>
-									<Img src={item.picUrl} name={item.name} />
+									<img src={getImageUrl(item)} alt={item.name} loading="lazy" />
 								</div>
 							</div>
 						</Link>

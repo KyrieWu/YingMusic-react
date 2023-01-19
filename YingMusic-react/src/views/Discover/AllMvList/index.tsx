@@ -20,7 +20,7 @@ const AllMvList: React.FC = () => {
 	const [area, setArea] = useState('');
 	const [type, setType] = useState('');
 	const [order, setOrder] = useState('');
-	const [mvList, setMvList] = useState<MVProps[]>([]);
+	const [mvList, setMvList] = useState<MVInfo[]>([]);
 	const [offset, setOffset] = useState(0);
 
 	useEffect(() => {
@@ -40,26 +40,9 @@ const AllMvList: React.FC = () => {
 	const getMVS = async () => {
 		nProgress.start();
 		let res = (await getAllMV(area, type, order, offset)) as unknown as ALLMvResult;
+
 		let artistmvs = res.data;
-		addMVList(artistmvs);
-	};
-
-	const addMVList = (artistmvs: MVInfo[]) => {
-		let mvListArr: MVProps[] = [];
-
-		artistmvs.forEach(item => {
-			mvListArr.push(
-				Object.freeze({
-					id: item.id,
-					name: item.name,
-					picUrl: item.cover,
-					artistId: item.artistId,
-					artistName: item.artistName,
-					playCount: item.playCount,
-				})
-			);
-		});
-		offset == 0 ? setMvList(mvListArr) : setMvList([...mvList, ...mvListArr]);
+		offset == 0 ? setMvList(artistmvs) : setMvList([...mvList, ...artistmvs]);
 		nProgress.done();
 	};
 

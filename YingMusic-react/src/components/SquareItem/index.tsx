@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Img from '../Img';
 import { timestampToDate } from '@/utils/fonmatDate';
 
 import styles from './style.module.scss';
@@ -19,6 +18,11 @@ type Props = {
 const SquareItem: React.FC<Props> = (props: Props) => {
 	const { squareItems } = props;
 
+	const getImageUrl = (item: any) => {
+		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
+		return `${img?.replace('http://', 'https://')}?param=512y512`;
+	};
+
 	return (
 		<div className={styles.content}>
 			{squareItems.map((item: SquareItemProps, index) => {
@@ -31,10 +35,10 @@ const SquareItem: React.FC<Props> = (props: Props) => {
 							<div className={styles.img}>
 								{item.routerPath ? (
 									<Link to={`${item.routerPath}/${item.id}`}>
-										<Img src={item.picUrl} name={item.name} />
+										<img src={getImageUrl(item)} alt={item.name} />
 									</Link>
 								) : (
-									<Img src={item.picUrl} name={item.name} />
+									<img src={getImageUrl(item)} alt={item.name} />
 								)}
 							</div>
 						</div>

@@ -1,0 +1,246 @@
+@media (max-width: 1500px) {
+	.login_container {
+		min-width: 1492px;
+		display: block;
+	}
+}
+
+.login_container {
+	margin-top: 64px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+
+	padding: {
+		top: 5rem;
+		left: 10vw;
+		right: 10vw;
+		bottom: 1rem;
+	}
+
+	.content {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+
+		.form_box {
+			background: transparent;
+			width: 100%;
+			border-radius: 10px;
+			display: flex;
+			//align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			transition: 0.5s ease-in-out;
+			color: var(--color-text);
+
+			.login_box {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				width: 100%;
+
+				.login_icon {
+					width: 8rem;
+					height: 8rem;
+					margin-bottom: 1rem;
+
+					img {
+						width: 100%;
+						height: 100%;
+						object-fit: cover;
+					}
+				}
+
+				h2 {
+					text-align: center;
+					font-size: 2.4rem;
+					margin-bottom: 4rem;
+					letter-spacing: 5px;
+				}
+
+				.phoneNumber,
+				.password {
+					width: 50rem;
+				}
+
+				.img {
+					width: 4rem;
+					height: 4.6rem;
+					background: var(--color-secondary-bg-for-transparent);
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					float: left;
+					margin: 8px 0;
+					margin-left: 5rem;
+					border-bottom-left-radius: 10px;
+					border-top-left-radius: 10px;
+
+					img {
+						width: 2rem;
+						height: 2rem;
+						opacity: 0.6;
+					}
+				}
+
+				input {
+					background: var(--color-secondary-bg-for-transparent);
+					width: 70%;
+					border: none;
+					padding: 1.16rem 0;
+					margin: 8px 0;
+					font-size: 18px;
+					letter-spacing: 2px;
+					color: var(--color-text);
+					border-bottom-right-radius: 10px;
+					border-top-right-radius: 10px;
+
+					&:focus {
+						outline: none;
+						transition: 0.5s;
+						color: var(--color-primary);
+					}
+
+					&:focus::placeholder {
+						opacity: 0;
+					}
+				}
+
+				input::-webkit-outer-spin-button,
+				input::-webkit-inner-spin-button {
+					appearance: none;
+				}
+
+				input[type='number'] {
+					appearance: textfield;
+				}
+
+				.loginButton {
+					width: 40rem;
+					margin-top: 35px;
+					background-color: #f6f6f6;
+					outline: none;
+					border-radius: 8px;
+					padding: 10px;
+					font-size: 18px;
+					font-weight: 600;
+					letter-spacing: 2px;
+					border: none;
+					cursor: pointer;
+					color: #fff;
+					background-color: var(--color-primary);
+
+					&:active {
+						transform: scale(0.95);
+					}
+
+					&:hover {
+						letter-spacing: 25px;
+						text-indent: 25px;
+					}
+				}
+
+				.phoneNumber {
+					position: relative;
+					margin-bottom: 1.5rem;
+
+					.phone_vaild {
+						position: absolute;
+						bottom: -1.5rem;
+						left: 5rem;
+						font-size: 1.2rem;
+						color: red;
+					}
+				}
+
+				.captcha {
+					display: flex;
+					width: 50rem;
+					position: relative;
+
+					input {
+						width: 30%;
+					}
+
+					.timeout {
+						position: absolute;
+						top: 0;
+						right: 6rem;
+						width: 35%;
+						height: 4.6rem;
+						margin-top: 0.8rem;
+						border-radius: 1rem;
+						font-size: 1.8rem;
+						text-align: center;
+						color: #fff;
+						cursor: pointer;
+						background-color: var(--color-primary);
+
+						&:active {
+							transform: scale(0.95);
+						}
+
+						&:hover {
+							letter-spacing: 2px;
+							text-indent: 0;
+						}
+					}
+
+					.captcha_vaild {
+						position: absolute;
+						bottom: -1.5rem;
+						left: 5rem;
+						font-size: 1.2rem;
+						color: red;
+					}
+
+					.disable {
+						&:active {
+							transform: scale(1);
+						}
+					}
+
+					img {
+						width: 2.5rem;
+						height: 2.5rem;
+						opacity: 0.6;
+					}
+				}
+			}
+
+			.logintype {
+				margin-top: 5rem;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				cursor: pointer;
+				font-size: 1.2rem;
+				color: var(--color-text);
+
+				span {
+					&:hover {
+						color: var(--color-primary);
+					}
+				}
+			}
+
+			.hidden {
+				display: none;
+				transition: 0.5s;
+			}
+		}
+	}
+
+	.notice {
+		width: 30rem;
+		height: 10rem;
+		border-top: 1px solid var(--color-secondary-bg-for-transparent);
+		margin-top: 2rem;
+		font-size: 1.2rem;
+		opacity: 0.7;
+	}
+}

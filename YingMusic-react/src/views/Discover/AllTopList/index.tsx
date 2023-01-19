@@ -35,6 +35,15 @@ const AllTopList: React.FC = () => {
 		}
 	};
 
+	const getImageUrl = (item: any) => {
+		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
+		return `${img?.replace('http://', 'https://')}?param=120y120`;
+	};
+	const getBigImgUrl = (item: any) => {
+		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
+		return `${img?.replace('http://', 'https://')}?param=512y512`;
+	};
+
 	return (
 		<div className={styles.topList_container}>
 			<div className={styles.left}>
@@ -51,7 +60,7 @@ const AllTopList: React.FC = () => {
 									}}
 								>
 									<div className={styles.item_left}>
-										<img src={item.coverImgUrl} alt={item.name} loading="lazy" />
+										<img src={getImageUrl(item)} alt={item.name} loading="lazy" />
 									</div>
 									<div className={styles.item_right}>
 										<p className={styles.name}>{item.name}</p>
@@ -73,7 +82,7 @@ const AllTopList: React.FC = () => {
 									}}
 								>
 									<div className={styles.item_left}>
-										<img src={item.coverImgUrl} alt={item.name} loading="lazy" />
+										<img src={getImageUrl(item)} alt={item.name} loading="lazy" />
 									</div>
 									<div className={styles.item_right}>
 										<p className={styles.name}>{item.name}</p>
@@ -88,7 +97,7 @@ const AllTopList: React.FC = () => {
 			<div className={styles.right}>
 				<div className={styles.playlist_main}>
 					<div className={styles.playlist_img}>
-						<img src={toplistInfo?.coverImgUrl} alt={toplistInfo?.name} />
+						<img src={toplistInfo && getBigImgUrl(toplistInfo)} alt={toplistInfo?.name} />
 					</div>
 					<div className={styles.playlist_detail}>
 						<div className={styles.title}>
@@ -96,7 +105,7 @@ const AllTopList: React.FC = () => {
 						</div>
 						<ul className={styles.data_info}>
 							<li className={styles.data_info_item}>
-								<div className={styles.data_tag_box}>
+								<div className={styles.data_tag_box} style={{ color: 'var(--color-text)' }}>
 									最近更新:&nbsp;
 									{timestampToDate(toplistInfo?.updateTime)}&nbsp;({toplistInfo?.updateFrequency})
 								</div>
@@ -110,10 +119,6 @@ const AllTopList: React.FC = () => {
 							<a className={styles.mod_btn}>
 								<i className={styles.mod_btn__icon_like}></i>
 								<span>添加到歌单</span>
-							</a>
-							<a className={styles.mod_btn}>
-								<i className={styles.mod_btn__icon_commend}></i>
-								<span>评论</span>
 							</a>
 						</div>
 					</div>
@@ -146,7 +151,7 @@ const AllTopList: React.FC = () => {
 														</a>
 													</div>
 													<div className={styles.songlist__songname}>
-														<img className={styles.song_icon} src={item.al.picUrl} loading="lazy" />
+														<img className={styles.song_icon} src={getImageUrl(item.al)} loading="lazy" />
 														<span className={styles.songlist__songname_txt}>{item.name}</span>
 													</div>
 													<div className={styles.songlist__artist}>

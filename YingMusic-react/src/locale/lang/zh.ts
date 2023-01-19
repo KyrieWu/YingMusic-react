@@ -2,6 +2,7 @@ export default {
 	common: {
 		play: '播放',
 		songs: '首歌',
+		switchLang: '切换语言成功'
 	},
 	header: {
 		home: '首页',
@@ -19,6 +20,7 @@ export default {
 		newAlbum: '新碟上架',
 		seeMore: '查看全部',
 		charts: '排行榜',
+		forYou: '为你推荐'
 	},
 	profile: {
 		sLibrary: '的音乐库',

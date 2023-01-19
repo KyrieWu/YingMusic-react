@@ -8,24 +8,29 @@ import {
 	UserOutlined,
 	BulbOutlined,
 	BulbFilled,
+	SettingOutlined,
 } from '@ant-design/icons';
-import { Switch } from 'antd';
+import { Switch, message } from 'antd';
 import { useTranslation } from 'react-i18next';
+import { useSelector, useDispatch } from 'react-redux';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
-
 import { changeAppearance } from '@/utils/common';
 
 import styles from './style.module.scss';
-import ContextMenu, { IProps } from '../ContextMenu';
+import ContextMenu from '../ContextMenu';
 
 const Header: React.FC = () => {
 	const location = useLocation();
 	const navigateTo = useNavigate();
 	const [inputFocus, setInputFocus] = useState(false);
-	const [keyword, setKeyWord] = useState('');
-	const contextMenuRef = useRef<IProps>(null);
-	const transContextRef = useRef<IProps>(null);
+	const [keyWord, setKeyWord] = useState('');
+	const contextMenuRef: any = useRef(null);
+	const transContextRef: any = useRef(null);
 	const { t, i18n } = useTranslation();
+	const dispatch = useDispatch();
+	const { isLogin } = useSelector((state: RootType) => ({
+		isLogin: state.handleUser.isLogin,
+	}));
 
 	// 处理 input 的 onFocus 事件
 	const focusHandler = () => {
@@ -37,35 +42,37 @@ const Header: React.FC = () => {
 		setInputFocus(false);
 	};
 
-	const showContextMenu = (event: React.MouseEvent<HTMLImageElement>): void => {
+	const showOrHideContextMenu = (event: React.MouseEvent<HTMLImageElement>): void => {
 		if (!contextMenuRef.current?.showMenu) {
 			contextMenuRef.current?.openMenu(event);
+		} else {
+			contextMenuRef.current?.closeMenu();
 		}
 	};
 
-	const closeContextMenu = () => {
-		contextMenuRef.current?.closeMenu();
-	};
-
-	const showTransContextMenu = (event: React.MouseEvent<HTMLDivElement>): void => {
+	const showOrHideTransContextMenu = (event: React.MouseEvent<HTMLDivElement>): void => {
 		if (!transContextRef.current?.showMenu) {
 			transContextRef.current?.openMenu(event);
+		} else {
+			transContextRef.current?.closeMenu();
 		}
-	};
-
-	const closeTransContextMenu = () => {
-		transContextRef.current?.closeMenu();
 	};
 
 	const toHome = () => {
 		navigateTo('/');
 	};
 
+	const toLogout = () => {
+		dispatch({ type: 'updateIsLogin', val: false });
+	};
+
 	const changLangToZH = () => {
 		i18n.changeLanguage('zh');
+		message.success(t('common.switchLang'));
 	};
 	const changLangToEN = () => {
 		i18n.changeLanguage('en');
+		message.success(t('common.switchLang'));
 	};
 
 	const changeTheme = (checked: boolean) => {
@@ -81,8 +88,10 @@ const Header: React.FC = () => {
 
 	const toSearch = async (e: React.KeyboardEvent) => {
 		if (e.key === 'Enter') {
-			navigateTo(`/search/${keyword}`);
+			dispatch({ type: 'updateKeyword', val: keyWord });
+			navigateTo(`/search/${keyWord}`);
 		}
+		e.preventDefault();
 	};
 
 	return (
@@ -110,7 +119,7 @@ const Header: React.FC = () => {
 								<input
 									type="search"
 									placeholder={`${inputFocus ? '' : t('header.search')}`}
-									value={keyword}
+									value={keyWord}
 									onChange={e => handleChange(e)}
 									onFocus={focusHandler}
 									onBlur={blurHandler}
@@ -123,11 +132,10 @@ const Header: React.FC = () => {
 					<UserOutlined
 						className={styles.avator}
 						alt="loginIcon"
-						onMouseEnter={showContextMenu}
-						onMouseLeave={closeContextMenu}
+						onClick={showOrHideContextMenu}
 						style={{ color: 'var(--color-text)', fontSize: '28px' }}
 					/>
-					<div className={styles.translate} onMouseEnter={showTransContextMenu} onMouseLeave={closeTransContextMenu}>
+					<div className={styles.translate} onClick={showOrHideTransContextMenu}>
 						<TranslationOutlined style={{ color: 'var(--color-text)', fontSize: '28px' }} />
 					</div>
 					<Switch
@@ -142,13 +150,20 @@ const Header: React.FC = () => {
 				</div>
 			</header>
 			<ContextMenu ref={contextMenuRef}>
+				{!isLogin ? (
+					<Link to={'/login'}>
+						<LoginOutlined />
+						{t('login.login')}
+					</Link>
+				) : (
+					<div>
+						<LogoutOutlined onClick={toLogout} />
+						{t('profile.userProfileMenu.logout')}
+					</div>
+				)}
 				<div>
-					<LoginOutlined />
-					{t('login.login')}
-				</div>
-				<div>
-					<LogoutOutlined />
-					{t('profile.userProfileMenu.logout')}
+					<SettingOutlined />
+					{t('settings.settings')}
 				</div>
 			</ContextMenu>
 			<ContextMenu ref={transContextRef}>

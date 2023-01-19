@@ -14,6 +14,7 @@ const MVDetail = lazy(() => import('@/views/Detail/MvDetail'));
 const ArtistDetail = lazy(() => import('@/views/Detail/ArtistDetail'));
 const AlbumDetail = lazy(() => import('@/views/Detail/AlbumDetail'));
 const Search = lazy(() => import('@/views/Search'));
+const Login = lazy(() => import('@/views/Login'));
 import { Navigate } from 'react-router-dom';
 
 // 懒加载
@@ -75,6 +76,10 @@ const routes = [
 	{
 		path: '/search/:keyword',
 		element: withLoadingComponent(<Search />),
+	},
+	{
+		path: '/login',
+		element: withLoadingComponent(<Login />),
 	},
 ];
 

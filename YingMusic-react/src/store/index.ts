@@ -2,9 +2,13 @@ import { legacy_createStore, combineReducers, compose, applyMiddleware } from 'r
 import reduxThunk from 'redux-thunk';
 
 import handlePlayList from './PlaylistStatus/reduver';
+import handleUser from './userStatus/reducer'
+import handleSearch from './SearchStatus/resucer'
 // 组合各个模块的reducer
 const reducers = combineReducers({
 	handlePlayList,
+	handleUser,
+	handleSearch
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
