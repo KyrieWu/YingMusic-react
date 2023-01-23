@@ -65,6 +65,7 @@ export default {
 		follow: '关注',
 		similarArtists: '相似艺人',
 		artistDesc: '艺术家介绍',
+		playAllPopularSongs: '播放热门歌曲'
 	},
 	album: {
 		released: '发行于',
@@ -74,6 +75,7 @@ export default {
 		playlist: '歌单',
 		updatedAt: '最后更新于',
 		search: '搜索歌单音乐',
+		playlistDesc: '歌单介绍'
 	},
 	login: {
 		accessToAll: '可访问全部数据',

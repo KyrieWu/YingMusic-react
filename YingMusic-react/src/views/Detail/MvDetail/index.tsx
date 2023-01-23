@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import MVItem, { MVProps } from '@/components/MVItem';
 import { useParams, Link } from 'react-router-dom';
 import { getMVUrl, getMVDetail, getArtistMV } from '@/apis';
 import styles from './styles.module.scss';
+import Plyr from 'plyr';
+import NProgress from 'nprogress';
 
 interface ArtistMv {
 	code: number;
@@ -25,23 +27,60 @@ interface MVURLData {
 	st: number;
 	url: string;
 }
+let videoOptions = {
+	settings: ['quality'],
+	autoplay: false,
+	quality: {
+		default: 1080,
+		options: [1080, 720, 480, 240],
+	},
+};
 
 const MVDetail: React.FC = () => {
 	const { id } = useParams();
-	const [mvUrl, setMvUrl] = useState({} as MVURLData);
+	const [mvUrl, setMvUrl] = useState<string>();
 	const [mvDetail, setMvDetail] = useState({} as MVInfo);
 	const [mvList, setMvList] = useState<MVProps[]>([]);
+	//const videoPlayer = useRef<HTMLVideoElement>(null);
 
 	useEffect(() => {
+		// let player = new Plyr(videoPlayer.current as HTMLVideoElement, videoOptions);
+		// getData(Number(id), player);
 		getmvurl(Number(id));
-		getartMV(Number(id));
+		// getartMV(Number(id));
 	}, [id]);
 
 	const getmvurl = async (id: number) => {
-		let res = await getMVUrl(id);
+		let res = await getMVUrl({ id });
 
-		setMvUrl(res.data);
+		setMvUrl(res.data.url.replace('http:', 'https:'));
+		getartMV(id);
 	};
+
+	// const getData = (id: number, player: Plyr) => {
+	// 	getMVDetail(id).then(data => {
+	// 		let mv = data;
+	// 		let requests = data.data.brs.map(br => {
+	// 			return getMVUrl({ id, r: br.br });
+	// 		});
+	// 		Promise.all(requests).then(results => {
+	// 			let sources = results.map(result => {
+	// 				return {
+	// 					src: result.data.url.replace(/^http:/, 'https:'),
+	// 					type: 'video/mp4',
+	// 					size: result.data.r,
+	// 				};
+	// 			});
+	// 			player.source = {
+	// 				type: 'video',
+	// 				title: mv.data.name,
+	// 				sources: sources,
+	// 				poster: mv.data.cover.replace(/^http:/, 'https:'),
+	// 			};
+	// 		});
+	// 	});
+	// 	getartMV(id);
+	// };
 
 	const getartMV = async (id: number) => {
 		let mvD = await getMVDetail(id);
@@ -65,7 +104,7 @@ const MVDetail: React.FC = () => {
 	return (
 		<div className={styles.mv_container}>
 			<div className={styles.mv_video}>
-				<video width="1276" height="718" className={styles.video} src={mvUrl.url} controls></video>
+				<video width="1276" height="718" className={styles.video} src={mvUrl} controls></video>
 			</div>
 			<div className={styles.mv_info}>
 				<div className={styles.mv_name}>

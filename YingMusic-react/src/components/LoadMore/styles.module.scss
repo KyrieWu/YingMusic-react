@@ -1,16 +1,22 @@
 .show_more {
 	width: 100%;
 	height: 4rem;
-	position: relative;
+	//position: relative;
 	margin-top: 5rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+
+	.line {
+		width: 50rem;
+		height: 2px;
+		margin-top: 2rem;
+		background-color: var(--color-secondary-bg-for-transparent);
+	}
 
 	.btn {
-		position: absolute;
 		padding: 0 10px;
-		//width: 12rem;
 		height: 100%;
-		top: -2rem;
-		left: 47%;
 		background-color: var(--color-secondary-bg-for-transparent);
 		text-align: center;
 		font-size: 1.7rem;
@@ -19,6 +25,11 @@
 		color: var(--color-text);
 		border-radius: 10px;
 		cursor: pointer;
+		display: block;
+		margin: {
+			left: 5px;
+			right: 5px;
+		}
 
 		&:hover {
 			color: var(--color-primary);

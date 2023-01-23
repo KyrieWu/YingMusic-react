@@ -19,9 +19,11 @@ const NavBar: React.FC = () => {
 			<Link to={'/discover/allTopList'} className={location.pathname === '/discover/allTopList' ? styles.active : ''}>
 				{t('nav.charts')}
 			</Link>
-
 			<Link to="/discover/allMVList" className={location.pathname === '/discover/allMVList' ? styles.active : ''}>
 				MV
+			</Link>
+			<Link to="/discover/allAlbums" className={location.pathname === '/discover/allAlbums' ? styles.active : ''}>
+				{t('nav.album')}
 			</Link>
 		</nav>
 	);

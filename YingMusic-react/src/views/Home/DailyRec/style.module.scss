@@ -28,10 +28,9 @@
 		.com_sons {
 			width: 50%;
 			height: 198px;
-
 			position: relative;
 			cursor: pointer;
-			border-radius: 1.5rem;
+			border-radius: 15px;
 			overflow: hidden;
 			z-index: 1;
 
@@ -94,14 +93,14 @@
 		}
 
 		.block {
-			width: 2%;
+			width: 1.5%;
 		}
 
 		.person_FM {
 			width: 50%;
 			height: 198px;
 			position: relative;
-			border-radius: 1.5rem;
+			border-radius: 15px;
 			overflow: hidden;
 
 			.bg {
@@ -136,7 +135,7 @@
 			}
 
 			.middle {
-				width: 42rem;
+				//width: 42rem;
 				height: 100%;
 				float: left;
 				display: flex;
@@ -157,7 +156,7 @@
 				}
 
 				.playsong {
-					width: 100%;
+					width: 15rem;
 					height: 5rem;
 					display: flex;
 					position: absolute;

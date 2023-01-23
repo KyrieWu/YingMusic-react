@@ -9,6 +9,7 @@ const AllPlayList = lazy(() => import('@/views/Discover/AllPlayList'));
 const AllArtists = lazy(() => import('@/views/Discover/AllArtists'));
 const AllTopList = lazy(() => import('@/views/Discover/AllTopList'));
 const AllMvList = lazy(() => import('@/views/Discover/AllMvList'));
+const AllAlbumList = lazy(() => import('@/views/Discover/AllAlbumList'));
 const SongListDetail = lazy(() => import('@/views/Detail/SongListDetail'));
 const MVDetail = lazy(() => import('@/views/Detail/MvDetail'));
 const ArtistDetail = lazy(() => import('@/views/Detail/ArtistDetail'));
@@ -54,6 +55,10 @@ const routes = [
 			{
 				path: '/discover/allMVList',
 				element: withLoadingComponent(<AllMvList />),
+			},
+			{
+				path: '/discover/allAlbums',
+				element: withLoadingComponent(<AllAlbumList />),
 			},
 		],
 	},

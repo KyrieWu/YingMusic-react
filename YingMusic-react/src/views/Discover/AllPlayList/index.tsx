@@ -36,7 +36,7 @@ const AllPlayList: React.FC = () => {
 
 	const getPlayLists = async () => {
 		nProgress.start();
-		const result = (await getReccategoryPlayList(20, playListCat, offset)) as unknown as CatePlayLists;
+		const result = (await getReccategoryPlayList(30, playListCat, offset)) as unknown as CatePlayLists;
 		const playListDatas = result.playlists;
 		addSquareItem(playListDatas);
 	};

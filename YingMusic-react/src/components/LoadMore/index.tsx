@@ -11,9 +11,11 @@ const LoadMore: React.FC<IProps> = props => {
 	const { clickHandler } = props;
 	return (
 		<div className={styles.show_more}>
+			<div className={styles.line}></div>
 			<div className={styles.btn} onClick={clickHandler}>
 				{t('footer.loadMore')}
 			</div>
+			<div className={styles.line}></div>
 		</div>
 	);
 };

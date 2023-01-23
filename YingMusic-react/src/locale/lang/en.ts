@@ -66,6 +66,7 @@ export default {
 		follow: 'Follow',
 		similarArtists: 'Similar Artists',
 		artistDesc: 'Artist Description',
+		playAllPopularSongs: 'Play Popular Songs'
 	},
 	album: {
 		released: 'Released',
@@ -75,6 +76,7 @@ export default {
 		playlist: 'Playlists',
 		updatedAt: 'Updated at',
 		search: 'Search in playlist',
+		playlistDesc: 'Playlist Description'
 	},
 	login: {
 		accessToAll: 'Access to all data',

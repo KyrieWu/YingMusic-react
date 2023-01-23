@@ -84,9 +84,9 @@ const RecNewAlbum: React.FC = () => {
 						</a>
 					);
 				})}
-				{/* <div className={styles.showAll}>
-					<Link to="/allAltumList">{t('home.seeMore')}</Link>
-				</div> */}
+				<div className={styles.showAll}>
+					<Link to="/discover/allAlbums">{t('home.seeMore')}</Link>
+				</div>
 			</div>
 			<SquareItem squareItems={squareItems}></SquareItem>
 		</div>

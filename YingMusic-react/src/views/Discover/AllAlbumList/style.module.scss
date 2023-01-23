@@ -1,0 +1,85 @@
+.allAlbum_container {
+	.head {
+		width: 100%;
+		position: relative;
+
+		.panel {
+			width: 100%;
+			padding: 1rem;
+
+			//background-color: var(--color-secondary-bg);
+			color: var(--color-text);
+
+			.categorie_content {
+				display: flex;
+
+				.categories {
+					font-size: 24px;
+					font-weight: 700;
+					opacity: 0.68;
+					min-width: 24px;
+					height: 26px;
+				}
+
+				.categories_list {
+					//margin-left: 3rem;
+					display: flex;
+					flex-wrap: wrap;
+
+					.item {
+						user-select: none;
+						display: flex;
+						align-items: center;
+						font-weight: 500;
+						font-size: 16px;
+						transition: 0.2s;
+						min-width: 50px;
+						margin-right: 3rem;
+
+						.item_name {
+							display: block;
+							text-align: center;
+							text-decoration: none;
+							border-radius: 10px;
+							padding: 5px;
+							padding-right: 10px;
+							padding-left: 10px;
+
+							&:hover {
+								background-color: var(--color-primary-bg);
+								color: var(--color-primary);
+							}
+
+							&:active {
+								transform: scale(0.98);
+								transition: transform 0.2s;
+							}
+						}
+					}
+
+					.active {
+						color: var(--color-primary);
+						background-color: var(--color-primary-bg);
+					}
+				}
+			}
+		}
+	}
+
+	.album_content {
+		.title {
+			font-size: 2.5rem;
+			font-weight: 600;
+			color: var(--color-text);
+			margin-left: 1rem;
+			margin-top: 5rem;
+			margin-bottom: 2rem;
+		}
+	}
+}
+
+@media (max-width: 1500px) {
+	.allAlbum_container {
+		min-width: 1487px;
+	}
+}

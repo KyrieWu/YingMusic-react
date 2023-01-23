@@ -25,11 +25,11 @@ export function getArtistMV(id: any, limit: number, offset: number) {
 }
 
 //get mv url
-export function getMVUrl(id: any) {
-	id = Number(id)
+export function getMVUrl(params: unknown) {
 	return service({
-		url: `/mv/url?id=${id}`,
-		method: 'get'
+		url: `/mv/url`,
+		method: 'get',
+		params,
 	})
 }
 

@@ -20,7 +20,7 @@ const MVItem: React.FC<Props> = (props: Props) => {
 	const { mvList } = props;
 	const getImageUrl = (mv: any) => {
 		let url = mv.imgurl16v9 ?? mv.cover ?? mv.coverUrl ?? mv.picUrl;
-		return url?.replace('http://', 'https://') + '?param=464y260';
+		return url?.replace('http:', 'https:') + '?param=464y260';
 	};
 
 	return (

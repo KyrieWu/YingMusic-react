@@ -42,8 +42,8 @@
 				width: 30rem;
 				height: 30rem;
 				display: block;
-				box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 16px -8px;
-				border-radius: 5%;
+				box-shadow: rgba(0, 0, 0, 0.2) 0px 16px 18px -8px;
+				border-radius: 10px;
 				object-fit: cover;
 			}
 		}
@@ -240,6 +240,8 @@
 		.detail_layout__main {
 			//float: left;
 			width: 100%;
+			display: flex;
+			flex-direction: column;
 
 			.mod_songlist {
 				width: 100%;
@@ -253,6 +255,7 @@
 					width: 100%;
 					line-height: 50px;
 					color: var(--color-text);
+					opacity: 0.7;
 
 					.songlist__header_empty {
 						width: 6%;
@@ -422,14 +425,20 @@
 
 						&:hover {
 							background-color: var(--color-secondary-bg-for-transparent);
+							transition: background-color 0.3s ease-in;
 
 							.songlist__add,
 							.songlist__play {
 								opacity: 1;
+								transition: opacity 0.3s ease-in;
 							}
 						}
 					}
 				}
+			}
+			.songlist_pagination {
+				margin-top: 1.5rem;
+				text-align: center;
 			}
 		}
 
