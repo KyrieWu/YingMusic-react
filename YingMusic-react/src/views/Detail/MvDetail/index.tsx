@@ -84,6 +84,7 @@ const MVDetail: React.FC = () => {
 
 	const getartMV = async (id: number) => {
 		let mvD = await getMVDetail(id);
+
 		setMvDetail(mvD.data);
 		let artistMV = (await getArtistMV(mvD.data.artistId, 5, 0)) as unknown as ArtistMv;
 		let mvList: MVProps[] = [];
@@ -104,7 +105,7 @@ const MVDetail: React.FC = () => {
 	return (
 		<div className={styles.mv_container}>
 			<div className={styles.mv_video}>
-				<video width="1276" height="718" className={styles.video} src={mvUrl} controls></video>
+				<video className={styles.video} src={mvUrl} controls></video>
 			</div>
 			<div className={styles.mv_info}>
 				<div className={styles.mv_name}>

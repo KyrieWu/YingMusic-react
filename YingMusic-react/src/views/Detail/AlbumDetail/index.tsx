@@ -72,7 +72,13 @@ const AlbumDetail: React.FC = () => {
 							<li className={styles.data_info_item}>
 								<div className={styles.data_tag_box}>
 									歌手:&nbsp;
-									<a className={styles.data_info_tags}>{albumInfo.artist?.name}</a>
+									<Link
+										to={`/artistDetail/ ${albumInfo.artist?.id}`}
+										className={styles.data_info_tags}
+										title={albumInfo.artist?.name}
+									>
+										{albumInfo.artist?.name}
+									</Link>
 								</div>
 							</li>
 							<li className={styles.data_info_item}>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import SquareItem from '@/components/SquareItem';
 import { Pagination, PaginationProps, Modal } from 'antd';
 import { useParams, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { getSongListInfo, getRelatedPlayList } from '@/apis';
 import { timestampToTime } from '@/utils/utils';
@@ -36,6 +37,7 @@ const SongListDetail: React.FC = () => {
 	const [next, setNext] = useState(10);
 	const [current, setCurrent] = useState(1);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		getsongLists(Number(id));
@@ -90,6 +92,10 @@ const SongListDetail: React.FC = () => {
 
 	const handleCancel = () => {
 		setIsModalOpen(false);
+	};
+
+	const playSong = (item: SongInfo) => {
+		dispatch({ type: 'playSong', val: item });
 	};
 
 	return (
@@ -168,6 +174,7 @@ const SongListDetail: React.FC = () => {
 													<a
 														className={`${styles.list_menu__item} ${styles.list_menu__play}`}
 														title={`${t('songItem.play')}`}
+														onClick={() => playSong(item)}
 													>
 														<i className={styles.list_menu__icon_play}></i>
 													</a>
@@ -206,7 +213,13 @@ const SongListDetail: React.FC = () => {
 						</div>
 						{trackInfos.length > 10 && (
 							<div className={styles.songlist_pagination}>
-								<Pagination current={current} onChange={onChange} total={trackInfos.length} responsive={true} />
+								<Pagination
+									className={'pagination'}
+									current={current}
+									onChange={onChange}
+									total={trackInfos.length}
+									responsive={true}
+								/>
 							</div>
 						)}
 					</div>

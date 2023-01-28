@@ -5,3 +5,4 @@ export * from './toplist';
 export * from './home'
 export * from './mv'
 export * from './login'
+export * from './song'

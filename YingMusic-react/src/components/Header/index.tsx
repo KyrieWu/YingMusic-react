@@ -18,6 +18,7 @@ import { changeAppearance } from '@/utils/common';
 
 import styles from './style.module.scss';
 import ContextMenu from '../ContextMenu';
+import loginIcon from '@/assets/icons/login.svg';
 
 const Header: React.FC = () => {
 	const location = useLocation();

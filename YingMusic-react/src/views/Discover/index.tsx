@@ -8,10 +8,10 @@ import styles from './style.module.scss';
 
 const Discover: React.FC = () => {
 	return (
-		<div className={styles.discover_container}>
+		<main className={styles.discover_container}>
 			<NavBar />
 			<Outlet />
-		</div>
+		</main>
 	);
 };
 

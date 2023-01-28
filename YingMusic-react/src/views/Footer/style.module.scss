@@ -1,11 +1,12 @@
 footer {
 	width: 100vw;
-	height: 10rem;
+	height: 15rem;
 	background-color: var(--color-secondary-bg);
 	color: rgba(60, 60, 60, 0.7);
 	font-size: 1.4rem;
 	text-align: center;
 	padding-top: 2rem;
+	//margin-bottom: 70px;
 
 	p {
 		margin-top: 1.5rem;
@@ -35,8 +36,8 @@ footer {
 		}
 	}
 }
-@media (max-width: 1500px) {
-	footer {
-		min-width: 100vw;
-	}
-}
+// @media (max-width: 1500px) {
+// 	footer {
+// 		min-width: 100vw;
+// 	}
+// }

@@ -81,7 +81,7 @@
 		}
 
 		.discription {
-			margin-left: 1.3rem;
+			margin-left: 1rem;
 			width: 85%;
 			color: var(--color-text);
 
@@ -124,8 +124,8 @@
 	clear: both;
 }
 
-@media (max-width: 1500px) {
-	.item {
-		flex: unset;
-	}
-}
+// @media (max-width: 1500px) {
+// 	.item {
+// 		flex: unset;
+// 	}
+// }

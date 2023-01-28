@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import SquareItem from '@/components/SquareItem';
 import { Pagination, PaginationProps, Modal } from 'antd';
 import { useParams, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { getArtistDetail, getArtistHotSong, getSimitArtist, getArtAlbum, getArtistMV } from '@/apis';
 import { timestampToTime } from '@/utils/utils';
 import styles from './style.module.scss';
+import './pagination.less';
 import MVItem, { MVProps } from '@/components/MVItem';
 
 interface HotSong {
@@ -66,6 +68,7 @@ const ArtistDetail: React.FC = () => {
 	const [mvListCurrent, setMVListCurrent] = useState(1);
 	const [albumListCurrent, setAlbumListCurrent] = useState(1);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const dispatch = useDispatch();
 
 	useEffect(() => {
 		getArtDetail(Number(id));
@@ -160,6 +163,10 @@ const ArtistDetail: React.FC = () => {
 		setIsModalOpen(false);
 	};
 
+	const playSong = (item: SongInfo) => {
+		dispatch({ type: 'playSong', val: item });
+	};
+
 	// const getsimitArtist = async (id: number) => {
 	// 	if (store.state.isLogin) {
 	// 		let res = (await getSimitArtist(id)) as unknown as SimitArtist;
@@ -237,6 +244,7 @@ const ArtistDetail: React.FC = () => {
 													<a
 														className={`${styles.list_menu__item} ${styles.list_menu__play}`}
 														title={`${t('songItem.play')}`}
+														onClick={() => playSong(item)}
 													>
 														<i className={styles.list_menu__icon_play}></i>
 													</a>
@@ -266,7 +274,7 @@ const ArtistDetail: React.FC = () => {
 							</ul>
 						</div>
 						{trackInfos.length > 10 && (
-							<div className={styles.songlist_pagination}>
+							<div className={styles.songlist_pagination + ' pagination '}>
 								<Pagination
 									current={songListCurrent}
 									onChange={onSongListChange}
@@ -285,6 +293,7 @@ const ArtistDetail: React.FC = () => {
 						{mvList.length > 10 && (
 							<div style={{ textAlign: 'center' }}>
 								<Pagination
+									className={'pagination'}
 									current={mvListCurrent}
 									onChange={onMVListChange}
 									total={mvList.length}
@@ -302,6 +311,7 @@ const ArtistDetail: React.FC = () => {
 						{squareItems.length > 10 && (
 							<div style={{ textAlign: 'center' }}>
 								<Pagination
+									className={'pagination'}
 									current={albumListCurrent}
 									onChange={onAlbumListChange}
 									total={squareItems.length}
