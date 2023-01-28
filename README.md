@@ -5,3 +5,7 @@
 ## 🖼️ 截图
 
 <img src='./image/home.png'>
+<img src='./image/discover.png'>
+<img src='./image/PlayListDetail.png'>
+<img src='./image/lang-en.png'>
+<img src='./image/theme-dark.png'>
