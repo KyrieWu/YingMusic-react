@@ -284,10 +284,9 @@
 		z-index: 100;
 		bottom: 64px;
 		left: 0rem;
-		border-bottom-left-radius: 0;
-		border-bottom-right-radius: 0;
 		background-color: #fff;
 		overflow: hidden;
+		padding-bottom: 1rem;
 
 		.bg {
 			width: 100%;
@@ -299,33 +298,34 @@
 				width: 100%;
 				height: 100%;
 				object-fit: cover;
-				filter: blur(200px);
+				filter: blur(500px);
 			}
 		}
 
 		.playList_top {
 			width: 100%;
-			height: 5%;
-			position: relative;
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			padding-top: 2rem;
 
 			.top_play_list {
 				font-size: 1.8rem;
-				line-height: 6rem;
+				line-height: 1.8rem;
 				margin-left: 2rem;
 				font-weight: 600;
 				color: var(--color-text);
 			}
 
 			.close {
-				height: 80%;
+				width: 3rem;
+				height: 3rem;
 				font-size: 4rem;
 				line-height: 2.2rem;
-				position: absolute;
-				top: 1.5rem;
-				right: 1.5rem;
 				cursor: pointer;
 				color: var(--color-text);
 				border-radius: 50%;
+				margin-right: 2rem;
 
 				&:hover {
 					color: var(--color-primary);
@@ -339,11 +339,8 @@
 			}
 
 			.deletelist {
-				position: absolute;
-				top: 1.4rem;
-				left: 50%;
+				height: 2.6rem;
 				cursor: pointer;
-				padding: 0.3rem;
 				border-radius: 0.5rem;
 
 				.delete_icon {
@@ -373,62 +370,43 @@
 					transition: transform 0.2s;
 				}
 			}
-
-			.top_play_songname {
-				width: 40rem;
-				height: 6rem;
-				position: absolute;
-				font-size: 1.8rem;
-				line-height: 6rem;
-				font-weight: 600;
-				text-align: center;
-				color: var(--color-text);
-				right: 8.4rem;
-				top: 0.2rem;
-			}
 		}
 
 		.playList_left {
 			width: 59%;
-			height: 91%;
+			height: 90%;
 			float: left;
 			margin-left: 1rem;
 			margin-top: 2rem;
 			overflow: auto;
 
 			.mod_songlist {
-				width: 95%;
-				height: 82%;
-
-				ul {
-					list-style: none;
-					display: block;
-				}
+				width: 100%;
+				height: 100%;
 
 				.songlist__header {
 					font-size: 14px;
-					position: relative;
+					display: flex;
+					flex-direction: row;
 					height: 5rem;
 					width: 100%;
-					display: block;
-					line-height: 5rem;
+					line-height: 50px;
+					color: var(--color-text);
+					opacity: 0.7;
 
-					li {
-						display: block;
-						float: left;
-
-						color: var(--color-text);
+					.songlist__header_empty {
+						width: 6%;
+						height: 100%;
+						margin-left: 1rem;
 					}
-
 					.songlist__header_name {
-						width: 50%;
+						width: 56%;
 						height: 100%;
 						display: inline-block;
-						padding-left: 4rem;
 					}
 
-					.songlist__header_album {
-						width: 25%;
+					.songlist__header_author {
+						width: 18%;
 						height: 100%;
 						display: inline-block;
 					}
@@ -436,12 +414,12 @@
 					.songlist__header_time {
 						width: 15%;
 						height: 100%;
+						text-align: center;
 					}
 				}
 
 				.songlist__list {
 					font-size: 14px;
-					height: 5rem;
 					width: 100%;
 					display: block;
 
@@ -449,27 +427,55 @@
 						width: 100%;
 						height: 5rem;
 						position: relative;
-						display: block;
-						line-height: 5rem;
+						display: flex;
+						line-height: 50px;
 						color: var(--color-text);
 						overflow: hidden;
 						border-radius: 1rem;
 
 						.songlist__number {
 							opacity: 0.7;
-							width: 34px;
+							width: 1%;
 							height: 100%;
-							position: absolute;
 							margin-left: 1rem;
+						}
+						.songlist__play {
+							width: 5%;
+							height: 100%;
+							opacity: 0;
+
+							.list_menu__item {
+								width: 4rem;
+								height: 4rem;
+								background-color: transparent;
+								display: block;
+
+								.list_menu__icon_play {
+									background: url('@/assets/icons/播放-blue.png') no-repeat center/cover;
+									width: 4rem;
+									height: 4rem;
+									display: inline-block;
+									margin-top: 0.5rem;
+									margin-left: 1rem;
+
+									&:active {
+										transform: scale(0.95);
+									}
+								}
+
+								&:hover {
+									transform: scale(1.05);
+								}
+							}
 						}
 
 						.songlist__songname {
-							width: 49%;
+							width: 56%;
 							height: 100%;
-							font-weight: 500;
-							float: left;
-							padding-left: 40px;
 							position: relative;
+							font-size: 1.8rem;
+							font-weight: 600;
+							user-select: none;
 
 							.songlist__songname_txt {
 								max-width: 72%;
@@ -483,133 +489,103 @@
 								font-size: 14px;
 								display: block;
 							}
-
-							.mod_list_menu {
-								width: 60%;
-								height: 100%;
-								opacity: 0;
-								position: absolute;
-								z-index: 100;
-								right: 0;
-								top: 0.25rem;
-
-								.list_menu__item {
-									width: 40px;
-									height: 40px;
-									background-color: #fff;
-									display: block;
-									position: relative;
-									margin-left: 7rem;
-									padding-top: 2.5px;
-									float: left;
-									background: transparent;
-
-									.list_menu__icon_play {
-										background: url('@/assets/icons/播放-blue.png') no-repeat center/cover;
-										width: 40px;
-										height: 40px;
-										display: inline-block;
-
-										&:active {
-											transform: scale(0.95);
-										}
-									}
-
-									.list_menu__icon_add {
-										background: url('@/assets/icons/添加-blue.png') no-repeat center/cover;
-										width: 39px;
-										height: 39px;
-										display: inline-block;
-
-										&:active {
-											transform: scale(0.95);
-										}
-									}
-
-									.list_menu__icon_delete {
-										background: url('@/assets/icons/删除-blue.png') no-repeat center/cover;
-										width: 39px;
-										height: 39px;
-										display: inline-block;
-
-										&:active {
-											transform: scale(0.95);
-										}
-									}
-
-									&:hover {
-										transform: scale(1.05);
-									}
-								}
-
-								.list_menu__add {
-									margin-left: 10px;
-								}
-
-								.list_menu__delete {
-									margin-left: 6px;
-								}
-							}
 						}
 
-						.songlist__album {
-							width: 25%;
+						.songlist__artist {
+							width: 18%;
 							height: 100%;
-							float: left;
 							overflow: hidden;
 							text-overflow: ellipsis;
 							white-space: nowrap;
-							padding-left: 0.5rem;
 						}
 
 						.songlist__time {
-							width: 11%;
+							width: 14%;
 							height: 100%;
-							float: left;
 							opacity: 0.7;
-							margin-left: 0.3rem;
+							text-align: center;
+						}
+
+						.songlist__add {
+							width: 5%;
+							height: 100%;
+							opacity: 0;
+
+							.list_menu__item {
+								width: 4rem;
+								height: 4rem;
+								background-color: transparent;
+								display: block;
+								position: relative;
+
+								.list_menu__icon_add {
+									background: url('@/assets/icons/删除-blue.png') no-repeat center/cover;
+									width: 4rem;
+									height: 4rem;
+									display: inline-block;
+									margin-top: 0.5rem;
+									//margin-left: 1rem;
+
+									&:active {
+										transform: scale(0.95);
+									}
+								}
+
+								&:hover {
+									transform: scale(1.05);
+								}
+							}
 						}
 
 						a {
 							color: var(--color-text);
 
 							&:hover {
-								color: var(--color-primary);
 								text-decoration: none;
+								color: var(--color-primary);
 							}
 						}
 
 						&:hover {
 							background-color: var(--color-secondary-bg-for-transparent);
+							transition: background-color 0.3s ease-in;
 
-							.mod_list_menu {
+							.songlist__add,
+							.songlist__play {
 								opacity: 1;
+								transition: opacity 0.3s ease-in;
 							}
 						}
 					}
 				}
+
+				.songlist_active {
+					background-color: var(--color-secondary-bg-for-transparent);
+					border-radius: 1rem;
+				}
+			}
+			&::-webkit-scrollbar-track {
+				background-color: transparent;
+				border-left: none;
 			}
 		}
 
 		.playList_right {
-			width: 38%;
+			width: 39%;
 			height: 91%;
 			float: right;
 			margin-right: 1rem;
 			margin-top: 2rem;
 
 			.song_img {
-				width: 100%;
-				height: 34%;
-
+				display: flex;
+				justify-content: center;
 				img {
-					width: 40.5%;
-					height: 100%;
+					width: 25rem;
+					height: 25rem;
 					object-fit: cover;
 					border-radius: 10%;
 					display: block;
-					margin-top: 2rem;
-					margin-left: 16rem;
 				}
 			}
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import SquareItem from '@/components/SquareItem';
 import { Pagination, PaginationProps, Modal } from 'antd';
+import { UserAddOutlined, UserDeleteOutlined } from '@ant-design/icons';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -167,6 +168,14 @@ const ArtistDetail: React.FC = () => {
 		dispatch({ type: 'playSong', val: item });
 	};
 
+	const playAllSong = (songs: SongInfo[]): void => {
+		dispatch({ type: 'updatePlayList', val: songs });
+	};
+
+	const addToPlaylist = (song: SongInfo) => {
+		dispatch({ type: 'addToPlayList', val: song });
+	};
+
 	// const getsimitArtist = async (id: number) => {
 	// 	if (store.state.isLogin) {
 	// 		let res = (await getSimitArtist(id)) as unknown as SimitArtist;
@@ -213,12 +222,12 @@ const ArtistDetail: React.FC = () => {
 							</div>
 						</div>
 						<div className={styles.data_actions}>
-							<a className={styles.mod_btn_green}>
+							<a className={styles.mod_btn_green} onClick={() => playAllSong(trackInfos)}>
 								<i className={styles.mod_btn_green__icon_play}></i>
 								<span>{t('artist.playAllPopularSongs')}</span>
 							</a>
 							<a className={styles.mod_btn}>
-								<i className={styles.mod_btn__icon_like}></i>
+								<UserAddOutlined className={styles.mod_btn__icon_like} />
 								<span>{t('artist.follow')}</span>
 							</a>
 						</div>
@@ -263,6 +272,7 @@ const ArtistDetail: React.FC = () => {
 													<a
 														className={`${styles.list_menu__item} ${styles.list_menu__add}`}
 														title={`${t('songItem.add')}`}
+														onClick={() => addToPlaylist(item)}
 													>
 														<i className={styles.list_menu__icon_add}></i>
 													</a>
@@ -323,14 +333,7 @@ const ArtistDetail: React.FC = () => {
 					</div>
 				)}
 			</div>
-			<Modal
-				title={t('artist.artistDesc')}
-				open={isModalOpen}
-				centered
-				onCancel={handleCancel}
-				footer={null}
-				mask={false}
-			>
+			<Modal title={t('artist.artistDesc')} open={isModalOpen} centered onCancel={handleCancel} footer={null}>
 				{artistData.artist?.briefDesc}
 			</Modal>
 		</>

@@ -1,6 +1,9 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, ChangeEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import useWatch from '@/hooks/useWatch';
+import { message } from 'antd';
 import {
 	StepBackwardOutlined,
 	StepForwardOutlined,
@@ -12,60 +15,193 @@ import {
 	UnorderedListOutlined,
 } from '@ant-design/icons';
 import styles from './style.module.scss';
-import { sortLyric } from '@/utils/sortLyric';
 import { timestampToTime, uptateTime } from '@/utils/utils';
-import { getLyric } from '@/apis';
+import { getLyric, checkMusic } from '@/apis';
 
 const Player: React.FC = () => {
+	const { t } = useTranslation();
 	const dispatch = useDispatch();
-	const player = useRef<HTMLAudioElement>(null);
+	const player = useRef<HTMLMediaElement>(null);
+	const lyric_content = useRef<HTMLDivElement>(null);
+	const progress = useRef<HTMLInputElement>(null);
 	const [isPlay, setIsPlay] = useState(false);
 	const [showPlaylist, setShowPlaylist] = useState(false);
 	const [_currenttime, setCurrentTime] = useState('00:00');
-	const [lyric, setLyric] = useState<any[]>([]);
+	const [_volumeRange, setVolumeRange] = useState<number>(0.5);
 
-	const { playList, playIndex, currentTime, lyricList } = useSelector((state: RootType) => ({
+	const { playList, playIndex, currentTime, lyric, duration, volumeRange } = useSelector((state: RootType) => ({
 		playList: state.handlePlayer.playList as SongInfo[],
 		playIndex: state.handlePlayer.playIndex as number,
 		currentTime: state.handlePlayer.currentTime as number,
-		lyricList: state.handlePlayer.lyricList,
+		lyric: state.handlePlayer.lyric as any[],
+		duration: state.handlePlayer.duration as number,
+		volumeRange: state.handlePlayer.volumeRange as number,
 	}));
 
 	useEffect(() => {
-		getLyric(playList[playIndex].id).then(res => {
-			dispatch({ type: 'getLyric', val: res.lrc });
+		dispatch({ type: 'updateVolumeRange', val: _volumeRange });
+	}, []);
+
+	// useWatch(playIndex, () => {
+	// 	getLyric(playList[playIndex].id).then(res => {
+	// 		dispatch({ type: 'getLyric', val: res.lrc });
+	// 	});
+	// 	let arr = sortLyric(lyricList?.lyric);
+	// 	setLyric(arr);
+	// });
+
+	useEffect(() => {
+		checkMusic(playList[playIndex]?.id).then(res => {
+			if (res.success) {
+				lyric_content.current && (lyric_content.current.scrollTop = 0);
+				dispatch({ type: 'updateDuration', val: player.current?.duration });
+				updataCurrenttime();
+				getLyric(playList[playIndex].id).then(res => {
+					dispatch({ type: 'getLyric', val: res.lrc.lyric });
+				});
+				setIsPlay(true);
+				progress.current && (progress.current.step = '0.01');
+			} else {
+				message.warning(`${t('player.warning')}`);
+				setIsPlay(false);
+			}
 		});
+	}, [playIndex]);
 
-		let arr = sortLyric(lyricList?.lyric);
+	// useEffect(() => {
+	// 	dispatch({ type: 'updateDuration', val: player.current?.duration });
+	// 	updataCurrenttime();
+	// 	getLyric(playList[playIndex].id).then(res => {
+	// 		dispatch({ type: 'getLyric', val: res.lrc });
+	// 	});
+	// 	let arr = sortLyric(lyricList?.lyric);
+	// 	setLyric(arr);
+	// 	setIsPlay(true);
+	// }, [playList]);
 
-		setLyric(arr);
-	}, [playList, playIndex]);
+	useEffect(() => {
+		if (currentTime == duration) {
+			nextSong();
+		} else {
+			let pactive = document.querySelector(`${styles.lyricActive}`) as HTMLElement;
+
+			if (pactive?.offsetTop > 500) {
+				lyric_content.current && (lyric_content.current.scrollTop = pactive.offsetTop - 500);
+			}
+		}
+	}, [currentTime]);
 
 	const getImageUrl = (item: any) => {
 		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
 		return `${img?.replace('http://', 'https://')}?param=120y120`;
 	};
+	const getBigImageUrl = (item: any) => {
+		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
+		return `${img?.replace('http://', 'https://')}?param=250y250`;
+	};
+	let interval: any;
+	const updataCurrenttime = () => {
+		interval = setInterval(() => {
+			dispatch({ type: 'updateCurrentTime', val: player.current?.currentTime });
+			if (player.current?.duration && player.current?.currentTime) {
+				setCurrentTime(uptateTime(player.current?.duration * 1000, player.current?.currentTime * 1000));
+			}
+		}, 1000);
+	};
+	const clearnterval = () => {
+		if (interval != null) {
+			clearInterval(interval);
+		}
+	};
+
+	const changeCurrentTime = (e: ChangeEvent<HTMLInputElement>) => {
+		dispatch({ type: 'updateCurrentTime', val: e.currentTarget.value });
+	};
+
+	const changeVolumn = (e: ChangeEvent<HTMLInputElement>) => {
+		setVolumeRange(Number(e.currentTarget.value));
+		player.current && (player.current.volume = Number(e.currentTarget.value));
+		dispatch({ type: 'updateVolumeRange', val: Number(e.currentTarget.value) });
+	};
+
+	const playOrPause = () => {
+		if (playList.length != 0) {
+			if (isPlay) {
+				player.current && player.current.pause();
+				clearnterval();
+			} else {
+				dispatch({ type: 'updateDuration', val: player.current?.duration });
+				player.current && player.current.play();
+				updataCurrenttime();
+			}
+			setIsPlay(!isPlay);
+		}
+	};
+
+	const prevSong = () => {
+		if (playList.length != 0) {
+			dispatch({ type: 'updatePlayIndex', val: playIndex - 1 });
+
+			if (playIndex <= 0) {
+				dispatch({ type: 'updatePlayIndex', val: playList.length - 1 });
+			}
+			lyric_content.current && (lyric_content.current.scrollTop = 0);
+			getLyric(playList[playIndex].id).then(res => {
+				dispatch({ type: 'getLyric', val: res.lrc.lyric });
+			});
+		}
+	};
+
+	const nextSong = () => {
+		if (playList.length != 0) {
+			dispatch({ type: 'updatePlayIndex', val: playIndex + 1 });
+
+			if (playIndex >= playList.length) {
+				dispatch({ type: 'updatePlayIndex', val: 0 });
+			}
+
+			lyric_content.current && (lyric_content.current.scrollTop = 0);
+			getLyric(playList[playIndex].id).then(res => {
+				dispatch({ type: 'getLyric', val: res.lrc.lyric });
+			});
+		}
+	};
+
+	const playSong = (item: any): void => {
+		lyric_content.current && (lyric_content.current.scrollTop = 0);
+		dispatch({ type: 'playSong', val: item });
+		getLyric(playList[playIndex].id).then(res => {
+			dispatch({ type: 'getLyric', val: res.lrc.lyric });
+		});
+	};
+	const deletePlaylist = () => {
+		dispatch({ type: 'deletePlayList' });
+	};
+
+	const deleteSong = (song: SongInfo) => {
+		dispatch({ type: 'deleteSongFormPlayList', val: song });
+	};
 
 	return (
 		<div className={styles.player}>
 			<div className={styles.left}>
-				<button className={styles.prevSong}>
+				<button className={styles.prevSong} onClick={() => prevSong()} title={`${t('player.previous')}`}>
 					<StepBackwardOutlined className={styles.prev_icon} />
 				</button>
-				<button className={styles.playOrPause}>
+				<button className={styles.playOrPause} onClick={() => playOrPause()}>
 					{isPlay ? (
-						<PauseCircleFilled className={styles.pauseOrPlay_icon} />
+						<PauseCircleFilled className={styles.pauseOrPlay_icon} title={`${t('player.pause')}`} />
 					) : (
-						<PlayCircleFilled className={styles.pauseOrPlay_icon} />
+						<PlayCircleFilled className={styles.pauseOrPlay_icon} title={`${t('player.play')}`} />
 					)}
 				</button>
-				<button className={styles.nextSong}>
+				<button className={styles.nextSong} onClick={() => nextSong()} title={`${t('player.next')}`}>
 					<StepForwardOutlined className={styles.next_icon} />
 				</button>
 			</div>
 			<div className={styles.middle}>
 				<div className={styles.img}>
-					<img src={getImageUrl(playList[playIndex]?.al)} alt="" />
+					<img src={playList[playIndex] && getImageUrl(playList[playIndex]?.al)} alt="" />
 				</div>
 				<div className={styles.middle_top}>
 					<div className={styles.play_name}>
@@ -79,20 +215,43 @@ const Player: React.FC = () => {
 					</div>
 				</div>
 				<div className={styles.nprogress}>
-					<input type="range" className={styles.range} min="0" max="duration" step="0.05" />
+					<input
+						ref={progress}
+						type="range"
+						className={styles.range}
+						min="0"
+						max={String(duration)}
+						value={currentTime}
+						onChange={e => {
+							changeCurrentTime(e);
+						}}
+					/>
 				</div>
 			</div>
 			<div className={styles.right}>
 				<div className={styles.like}>
-					<HeartOutlined />
+					<HeartOutlined title={`${t('player.like')}`} />
 				</div>
-				<div className={`${styles.playlist} ${showPlaylist ? styles.active : ''}`}>
-					<UnorderedListOutlined onClick={() => setShowPlaylist(!showPlaylist)} />
+				<div
+					className={`${styles.playlist} ${showPlaylist ? styles.active : ''}`}
+					onClick={() => setShowPlaylist(!showPlaylist)}
+					title={`${t('player.nextUp')}`}
+				>
+					<UnorderedListOutlined />
 				</div>
 				<div className={styles.volume}>
-					<SoundOutlined className={styles.volume_icon} />
+					<SoundOutlined className={styles.volume_icon} title={`${t('player.mute')}`} />
 					<div className={styles.volume_range}>
-						<input type="range" min="0" max="1" step="0.01" v-model="volumeRange" />
+						<input
+							type="range"
+							min="0"
+							max="1"
+							step="0.01"
+							value={_volumeRange}
+							onChange={e => {
+								changeVolumn(e);
+							}}
+						/>
 					</div>
 				</div>
 			</div>
@@ -107,7 +266,6 @@ const Player: React.FC = () => {
 							<i className={styles.delete_icon}></i>
 							<span className={styles.delete_title}>清空列表</span>
 						</div>
-						<div className={styles.top_play_songname}>{playList[playIndex]?.name}</div>
 						<span className={styles.close} onClick={() => setShowPlaylist(false)}>
 							×
 						</span>
@@ -115,37 +273,48 @@ const Player: React.FC = () => {
 					<div className={styles.playList_left}>
 						<div className={styles.mod_songlist}>
 							<ul className={styles.songlist__header}>
-								<li className={styles.songlist__header_name}>歌曲</li>
-								<li className={styles.songlist__header_album}>歌手</li>
-								<li className={styles.songlist__header_time}>时长</li>
+								<li className={styles.songlist__header_empty}></li>
+								<li className={styles.songlist__header_name}>{t('songItem.songName')}</li>
+								<li className={styles.songlist__header_author}>{t('songItem.singer')}</li>
+								<li className={styles.songlist__header_time}>{t('songItem.songTime')}</li>
 							</ul>
 							<ul className={styles.songlist__list}>
 								{playList.map((item, index) => {
 									return (
-										<li key={item.id}>
+										<li className={playIndex == index ? styles.songlist_active : ''} key={index}>
 											<div className={styles.songlist__item}>
 												<div className={styles.songlist__number}>{index + 1}</div>
-												<div className={styles.songlist__songname}>
-													<span className={styles.songlist__songname_txt}>
-														<a title="item.name">{item.name}</a>
-													</span>
-
-													{/* <div className={styles.mod_list_menu}>
-											<a className={`styles.list_menu__item list_menu__play`} title="播放">
-												<i className="list_menu__icon_play"></i>
-											</a>
-											<a className="list_menu__item list_menu__add" title="添加到歌单">
-												<i className="list_menu__icon_add"></i>
-											</a>
-											<a className="list_menu__item list_menu__delete" title="从歌单中删除">
-												<i className="list_menu__icon_delete"></i>
-											</a>
-										</div> */}
+												<div className={styles.songlist__play}>
+													<a
+														className={`${styles.list_menu__item} ${styles.list_menu__play}`}
+														title={`${t('songItem.play')}`}
+														onClick={() => playSong(item)}
+													>
+														<i className={styles.list_menu__icon_play}></i>
+													</a>
 												</div>
-												<div className={styles.songlist__album}>
-													<Link to={`/artistDetail/${item.ar[0].id}`}>{item.ar[0].name}</Link>
+												<div className={styles.songlist__songname}>
+													<span className={styles.songlist__songname_txt}>{item.name}</span>
+												</div>
+												<div className={styles.songlist__artist}>
+													<Link
+														to={`/artistDetail/ ${item.ar[0].id}`}
+														className={styles.playlist__author}
+														title={item.ar[0].name}
+													>
+														{item.ar[0].name}
+													</Link>
 												</div>
 												<div className={styles.songlist__time}>{timestampToTime(item.dt)}</div>
+												<div className={styles.songlist__add}>
+													<a
+														className={`${styles.list_menu__item} ${styles.list_menu__add}`}
+														title={`${t('songItem.delete')}`}
+														onClick={() => deleteSong(item)}
+													>
+														<i className={styles.list_menu__icon_add}></i>
+													</a>
+												</div>
 											</div>
 										</li>
 									);
@@ -155,11 +324,26 @@ const Player: React.FC = () => {
 					</div>
 					<div className={styles.playList_right}>
 						<div className={styles.song_img}>
-							<img src={playList[playIndex]?.al.picUrl} alt={playList[playIndex]?.al.name} />
+							<img
+								src={playList[playIndex] && getBigImageUrl(playList[playIndex]?.al)}
+								alt={playList[playIndex]?.al.name}
+							/>
 						</div>
-						<div className={styles.lyric}>
+						<div className={styles.lyric} ref={lyric_content}>
 							{lyric?.map((item, index) => {
-								return <p key={index}>{item.lrc}</p>;
+								return (
+									<p
+										key={index}
+										className={
+											(currentTime * 1000 >= item.time && currentTime * 1000 < item.pre) ||
+											(currentTime * 1000 >= item.time && item.pre == 0)
+												? styles.lyricActive
+												: ''
+										}
+									>
+										{item.lrc}
+									</p>
+								);
 							})}
 						</div>
 					</div>

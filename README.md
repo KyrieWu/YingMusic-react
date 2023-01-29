@@ -9,3 +9,4 @@
 <img src='./image/PlayListDetail.png'>
 <img src='./image/lang-en.png'>
 <img src='./image/theme-dark.png'>
+<img src='./image/playlist.png'>

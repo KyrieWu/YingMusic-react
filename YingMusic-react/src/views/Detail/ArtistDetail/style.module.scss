@@ -179,11 +179,10 @@
 					margin-right: 10px;
 
 					.mod_btn__icon_like {
-						background: url('@/assets/icons/加关注\(人\).png') no-repeat center/cover;
+						//background: url('@/assets/icons/加关注\(人\).png') no-repeat center/cover;
 						float: left;
-						width: 25px;
-						height: 25px;
-						margin-top: 5px;
+						font-size: 2rem;
+						margin-top: 8px;
 						margin-right: 4px;
 					}
 

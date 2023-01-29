@@ -34,20 +34,19 @@
 			height: 3.5rem;
 			cursor: pointer;
 			float: left;
-			margin-top: -0.5rem;
+			margin-top: -0.8rem;
 			margin-right: 1rem;
 			display: flex;
 			justify-content: center;
 			align-items: center;
 			border-radius: 10px;
+			color: var(--color-text);
 
 			.mv_like_icon {
-				background: url('@/assets/icons/收藏.png') no-repeat center/cover;
 				float: left;
-				width: 3rem;
-				height: 3rem;
+				font-size: 2.5rem;
 				//margin-top: 5px;
-				margin-right: 4px;
+				margin-right: 1px;
 			}
 
 			&:hover {

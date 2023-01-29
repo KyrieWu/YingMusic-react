@@ -120,6 +120,7 @@ export default {
 		pause: 'Pause',
 		mute: 'Mute',
 		nextUp: 'Next Up',
+		warning: 'There is no copyright for this song!'
 	},
 	modal: {
 		close: 'Close',
@@ -246,7 +247,8 @@ export default {
 		songTime: 'Song time',
 		album: "Album",
 		play: 'Play',
-		add: 'Add to the playlist ',
+		add: 'Add the song to the playlist',
+		delete: 'Delete the song from the playlist'
 	},
 	songListDetail: {
 		similarPlaylist: 'Similar Playlist'

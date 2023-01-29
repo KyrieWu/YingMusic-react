@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import SquareItem from '@/components/SquareItem';
 import { Pagination, PaginationProps, Modal } from 'antd';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { useParams, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -148,7 +149,7 @@ const SongListDetail: React.FC = () => {
 								<span>播放全部</span>
 							</a>
 							<a className={styles.mod_btn}>
-								<i className={styles.mod_btn__icon_like}></i>
+								<HeartOutlined className={styles.mod_btn__icon_like} />
 								<span>收藏</span>
 							</a>
 						</div>

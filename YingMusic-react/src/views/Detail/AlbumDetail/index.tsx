@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { Modal } from 'antd';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import { getAltumDetail } from '@/apis';
 import { timestampToTime, timestampToDate } from '@/utils/utils';
@@ -103,7 +104,7 @@ const AlbumDetail: React.FC = () => {
 								<span>播放全部</span>
 							</a>
 							<a className={styles.mod_btn}>
-								<i className={styles.mod_btn__icon_like}></i>
+								<HeartOutlined className={styles.mod_btn__icon_like} />
 								<span>收藏</span>
 							</a>
 						</div>

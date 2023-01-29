@@ -119,6 +119,7 @@ export default {
 		pause: '暂停',
 		mute: '静音',
 		nextUp: '播放列表',
+		warning: '此歌曲暂无版权!'
 	},
 	modal: {
 		close: '关闭',
@@ -246,6 +247,7 @@ export default {
 		album: "专辑",
 		play: '播放',
 		add: '添加到播放列表',
+		delete: '从播放列表删除'
 	},
 	songListDetail: {
 		similarPlaylist: '相似歌单'

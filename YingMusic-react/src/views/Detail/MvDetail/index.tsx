@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import MVItem, { MVProps } from '@/components/MVItem';
 import { useParams, Link } from 'react-router-dom';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { getMVUrl, getMVDetail, getArtistMV } from '@/apis';
 import styles from './styles.module.scss';
 import Plyr from 'plyr';
-import NProgress from 'nprogress';
 
 interface ArtistMv {
 	code: number;
@@ -111,7 +111,7 @@ const MVDetail: React.FC = () => {
 				<div className={styles.mv_name}>
 					<Link to={`/artistDetail/${mvDetail.artistId}`}>{mvDetail.artistName}</Link>&nbsp;—&nbsp;{mvDetail.name}
 					<div className={styles.mv_icon}>
-						<i className={styles.mv_like_icon} title="收藏"></i>
+						<HeartOutlined className={styles.mv_like_icon} title="收藏" />
 					</div>
 				</div>
 

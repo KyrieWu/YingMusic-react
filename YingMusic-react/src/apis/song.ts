@@ -8,3 +8,12 @@ export function getLyric(id: any): Promise<Lyric> {
         method: 'get'
     })
 }
+
+// chunk song
+export function checkMusic(id: any): Promise<CheckMusic> {
+    id = Number(id)
+    return service({
+        url: `/check/music?id=${id}`,
+        method: 'get'
+    })
+}
