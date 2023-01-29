@@ -42,14 +42,6 @@ const Player: React.FC = () => {
 		dispatch({ type: 'updateVolumeRange', val: _volumeRange });
 	}, []);
 
-	// useWatch(playIndex, () => {
-	// 	getLyric(playList[playIndex].id).then(res => {
-	// 		dispatch({ type: 'getLyric', val: res.lrc });
-	// 	});
-	// 	let arr = sortLyric(lyricList?.lyric);
-	// 	setLyric(arr);
-	// });
-
 	useEffect(() => {
 		checkMusic(playList[playIndex]?.id).then(res => {
 			if (res.success) {
@@ -64,6 +56,9 @@ const Player: React.FC = () => {
 			} else {
 				message.warning(`${t('player.warning')}`);
 				setIsPlay(false);
+				setTimeout(() => {
+					nextSong();
+				}, 2000);
 			}
 		});
 	}, [playIndex]);
@@ -164,6 +159,7 @@ const Player: React.FC = () => {
 			getLyric(playList[playIndex].id).then(res => {
 				dispatch({ type: 'getLyric', val: res.lrc.lyric });
 			});
+			setIsPlay(true);
 		}
 	};
 
@@ -220,6 +216,7 @@ const Player: React.FC = () => {
 						type="range"
 						className={styles.range}
 						min="0"
+						step="0.01"
 						max={String(duration)}
 						value={currentTime}
 						onChange={e => {
