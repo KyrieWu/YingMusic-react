@@ -309,6 +309,7 @@ const Player: React.FC = () => {
 														to={`/artistDetail/ ${item.ar[0].id}`}
 														className={styles.playlist__author}
 														title={item.ar[0].name}
+														onClick={() => setShowPlaylist(false)}
 													>
 														{item.ar[0].name}
 													</Link>
