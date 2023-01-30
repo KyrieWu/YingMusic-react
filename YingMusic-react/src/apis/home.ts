@@ -8,7 +8,7 @@ export function getBanner(): Promise<Banners> {
 }
 
 // get daily recommend songs
-export function getDailyRecommendSongs() {
+export function getDailyRecommendSongs(): Promise<DailyRecommendSongs> {
 	return service({
 		url: `/recommend/songs`,
 		method: 'get'

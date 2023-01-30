@@ -47,6 +47,7 @@ const AllPlayList: React.FC = () => {
 			squareItemArr.push(
 				Object.freeze({
 					id: item.id,
+					type: 'songlist',
 					picUrl: item.coverImgUrl,
 					name: item.name,
 					playCount: item.playCount,

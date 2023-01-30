@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SpinPage from '@/components/Spin';
 import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
 import { getTopList, getPlayListTrack } from '@/apis';
 import { timestampToDate, timestampToTime } from '@/utils/utils';
 import { Link } from 'react-router-dom';
@@ -9,6 +10,7 @@ import styles from './style.module.scss';
 
 const AllTopList: React.FC = () => {
 	const { t } = useTranslation();
+	const dispatch = useDispatch();
 	const [cateToplist, setCateTopList] = useState<TopListInfo[]>([]);
 	const [toplistInfo, setTopListInfo] = useState<TopListInfo>();
 	const [trackInfos, setTrackInfos] = useState<SongInfo[]>([]);
@@ -42,6 +44,22 @@ const AllTopList: React.FC = () => {
 	const getBigImgUrl = (item: any) => {
 		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
 		return `${img?.replace('http://', 'https://')}?param=512y512`;
+	};
+
+	const playSong = (item: SongInfo) => {
+		dispatch({ type: 'playSong', val: item });
+	};
+
+	const playAllSong = (songs: SongInfo[]): void => {
+		dispatch({ type: 'updatePlayList', val: songs });
+	};
+
+	const addToPlaylist = (song: SongInfo) => {
+		dispatch({ type: 'addToPlayList', val: song });
+	};
+
+	const addAllToPlayList = (songs: SongInfo[]) => {
+		dispatch({ type: 'addAllToPlayList', val: songs });
 	};
 
 	return (
@@ -112,12 +130,15 @@ const AllTopList: React.FC = () => {
 							</li>
 						</ul>
 						<div className={styles.data_actions}>
-							<a className={styles.mod_btn_green}>
+							<a className={styles.mod_btn_green} onClick={() => playAllSong(trackInfos)}>
 								<i className={styles.mod_btn_green__icon_play}></i>
 								<span>播放全部</span>
 							</a>
-							<a className={styles.mod_btn}>
-								<i className={styles.mod_btn__icon_like}></i>
+							<a className={styles.mod_btn} onClick={() => addAllToPlayList(trackInfos)}>
+								<div className={styles.mod_btn__icon_like}>
+									<i className={styles.mod_btn__icon_like1}></i>
+									<i className={styles.mod_btn__icon_like2}></i>
+								</div>
 								<span>添加到歌单</span>
 							</a>
 						</div>
@@ -146,6 +167,7 @@ const AllTopList: React.FC = () => {
 														<a
 															className={`${styles.list_menu__item} ${styles.list_menu__play}`}
 															title={`${t('songItem.play')}`}
+															onClick={() => playSong(item)}
 														>
 															<i className={styles.list_menu__icon_play}></i>
 														</a>
@@ -168,6 +190,7 @@ const AllTopList: React.FC = () => {
 														<a
 															className={`${styles.list_menu__item} ${styles.list_menu__add}`}
 															title={`${t('songItem.add')}`}
+															onClick={() => addToPlaylist(item)}
 														>
 															{' '}
 															<i className={styles.list_menu__icon_add}></i>

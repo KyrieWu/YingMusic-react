@@ -19,14 +19,20 @@ const store = {
         }, action: {
             type: string, val: SongInfo
         }) {
-
+            let length = 0
             if (newState.playList.length > 0) {
                 newState.playList.forEach((item, index) => {
                     if (item.id == action.val.id) {
                         newState.playIndex = index
-                        newState.showPlayerBar = true
+                        return;
+                    }
+                    length++
+                    if (length == newState.playList.length) {
+                        newState.playList.unshift(action.val)
+                        newState.playIndex = 0
                     }
                 })
+                newState.showPlayerBar = true
             } else {
                 newState.playList.unshift(action.val)
                 newState.playIndex = 0
@@ -97,6 +103,10 @@ const store = {
                 newState.showPlayerBar = true
             }
         },
+        addAllToPlayList(newState: { playList: SongInfo[], playIndex: number }, action: { type: string, val: SongInfo[] }) {
+            newState.playIndex += action.val.length
+            newState.playList.unshift(...action.val)
+        }
 
     } as LooseObject,
     asyncActions: {

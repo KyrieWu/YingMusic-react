@@ -114,6 +114,7 @@ const ArtistDetail: React.FC = () => {
 			squareItems.push(
 				Object.freeze({
 					id: item.id,
+					type: 'album',
 					name: item.name,
 					picUrl: item.picUrl,
 					routerPath: '/albumDetail',

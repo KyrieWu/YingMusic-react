@@ -4,7 +4,6 @@ import { useParams, Link } from 'react-router-dom';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { getMVUrl, getMVDetail, getArtistMV } from '@/apis';
 import styles from './styles.module.scss';
-import Plyr from 'plyr';
 
 interface ArtistMv {
 	code: number;
@@ -13,41 +12,14 @@ interface ArtistMv {
 	time: number;
 }
 
-interface MVURLData {
-	code: number;
-	expi: number;
-	fee: number;
-	id: number;
-	md5: string;
-	msg: string;
-	mvFee: number;
-	promotionVo: null;
-	r: number;
-	size: number;
-	st: number;
-	url: string;
-}
-let videoOptions = {
-	settings: ['quality'],
-	autoplay: false,
-	quality: {
-		default: 1080,
-		options: [1080, 720, 480, 240],
-	},
-};
-
 const MVDetail: React.FC = () => {
 	const { id } = useParams();
 	const [mvUrl, setMvUrl] = useState<string>();
 	const [mvDetail, setMvDetail] = useState({} as MVInfo);
 	const [mvList, setMvList] = useState<MVProps[]>([]);
-	//const videoPlayer = useRef<HTMLVideoElement>(null);
 
 	useEffect(() => {
-		// let player = new Plyr(videoPlayer.current as HTMLVideoElement, videoOptions);
-		// getData(Number(id), player);
 		getmvurl(Number(id));
-		// getartMV(Number(id));
 	}, [id]);
 
 	const getmvurl = async (id: number) => {
@@ -56,31 +28,6 @@ const MVDetail: React.FC = () => {
 		setMvUrl(res.data.url.replace('http:', 'https:'));
 		getartMV(id);
 	};
-
-	// const getData = (id: number, player: Plyr) => {
-	// 	getMVDetail(id).then(data => {
-	// 		let mv = data;
-	// 		let requests = data.data.brs.map(br => {
-	// 			return getMVUrl({ id, r: br.br });
-	// 		});
-	// 		Promise.all(requests).then(results => {
-	// 			let sources = results.map(result => {
-	// 				return {
-	// 					src: result.data.url.replace(/^http:/, 'https:'),
-	// 					type: 'video/mp4',
-	// 					size: result.data.r,
-	// 				};
-	// 			});
-	// 			player.source = {
-	// 				type: 'video',
-	// 				title: mv.data.name,
-	// 				sources: sources,
-	// 				poster: mv.data.cover.replace(/^http:/, 'https:'),
-	// 			};
-	// 		});
-	// 	});
-	// 	getartMV(id);
-	// };
 
 	const getartMV = async (id: number) => {
 		let mvD = await getMVDetail(id);

@@ -27,6 +27,7 @@ const RecPlaylist: React.FC = () => {
 			squareItems.push(
 				Object.freeze({
 					id: item.id,
+					type: 'songlist',
 					picUrl: item.coverImgUrl,
 					name: item.name,
 					routerPath: '/songlistDetail',
@@ -44,6 +45,7 @@ const RecPlaylist: React.FC = () => {
 			squareItems.push(
 				Object.freeze({
 					id: item.id,
+					type: 'songlist',
 					picUrl: item.picUrl,
 					name: item.name,
 					routerPath: '/songlistDetail',

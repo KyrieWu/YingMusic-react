@@ -74,3 +74,11 @@ interface CheckMusic {
 	success: boolean;
 	message: string;
 }
+
+
+interface DailyRecommendSongs {
+	code: number
+	data: {
+		dailySongs: SongInfo[]
+	}
+}

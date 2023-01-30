@@ -110,7 +110,11 @@ const Player: React.FC = () => {
 	};
 
 	const changeCurrentTime = (e: ChangeEvent<HTMLInputElement>) => {
-		dispatch({ type: 'updateCurrentTime', val: e.currentTarget.value });
+		clearnterval();
+		player.current && (player.current.currentTime = Number(e.currentTarget.value));
+		if (isPlay) {
+			updataCurrenttime();
+		}
 	};
 
 	const changeVolumn = (e: ChangeEvent<HTMLInputElement>) => {
@@ -202,7 +206,14 @@ const Player: React.FC = () => {
 				<div className={styles.middle_top}>
 					<div className={styles.play_name}>
 						{' '}
-						{playList[playIndex]?.name}-{playList[playIndex]?.ar[0].name}
+						{playList[playIndex]?.name} -{' '}
+						<Link
+							to={`/artistDetail/ ${playList[playIndex]?.ar[0].id}`}
+							className={styles.playlist__author}
+							title={playList[playIndex]?.ar[0].name}
+						>
+							{playList[playIndex]?.ar[0].name}
+						</Link>
 					</div>
 					<div className={styles.play_time}>
 						<span>

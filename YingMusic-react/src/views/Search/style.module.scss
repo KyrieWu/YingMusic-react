@@ -1,13 +1,8 @@
-@media (max-width: 1500px) {
-	.search_container {
-		min-width: 1487px;
-	}
-}
-
 .search_container {
 	margin-top: 64px;
-	width: 100vw;
-	overflow: hidden;
+	padding: {
+		bottom: 10rem;
+	}
 
 	.search_top {
 		width: 100%;
@@ -28,22 +23,23 @@
 			height: 5rem;
 			width: 30%;
 			padding-right: 0.4rem;
-			background: #fff;
+			background: var(--color-body-bg);
 			border-top-left-radius: 1rem;
 			border-bottom-left-radius: 1rem;
 			z-index: 10;
 
-			.search_input {
+			input {
+				font-size: 1.6rem;
+				font-weight: 600;
 				margin-right: 0.2rem;
 				width: 100%;
 				height: 96%;
 				outline: none;
 				border: none;
 				background: transparent;
-				color: var(--color-text);
-				font-size: 1.6rem;
 				text-align: start;
 				text-indent: 1.5rem;
+				color: var(--color-text);
 			}
 		}
 
@@ -54,17 +50,17 @@
 			justify-content: center;
 			align-items: center;
 			cursor: pointer;
-			background: #fff;
+			background: var(--color-body-bg);
 			border-top-right-radius: 1rem;
 			border-bottom-right-radius: 1rem;
 			z-index: 10;
 
 			.search_icon {
-				background: url(@/assets/icons/search.svg) no-repeat center/cover;
-				width: 2.5rem;
-				height: 2.5rem;
+				//background: url(@/assets/icons/search.svg) no-repeat center/cover;
+				font-size: 2.5rem;
 				opacity: 0.5;
 				display: block;
+				color: var(--color-text);
 
 				&:active {
 					transform: scale(0.97);
@@ -74,12 +70,13 @@
 			&:hover {
 				.search_icon {
 					opacity: 1;
+					color: var(--color-primary);
 				}
 			}
 		}
 
 		.active {
-			.search_input {
+			input {
 				opacity: 1;
 				color: var(--color-primary);
 			}
@@ -87,9 +84,11 @@
 	}
 
 	.search_content {
-		width: 100%;
-		overflow: hidden;
-		margin: 0 auto;
+		padding: {
+			top: 1rem;
+			left: 10vw;
+			right: 10vw;
+		}
 
 		.nav {
 			width: 100%;
@@ -108,6 +107,7 @@
 				color: var(--color-text);
 				cursor: pointer;
 				user-select: none;
+				margin-right: 3rem;
 
 				&:hover {
 					color: var(--color-primary);
@@ -123,12 +123,8 @@
 
 		.content {
 			width: 100%;
-			margin: 0 auto;
 
 			.song {
-				width: 80%;
-				margin: 0 auto;
-
 				.title {
 					font-size: 1.4rem;
 					color: var(--color-text);
@@ -137,33 +133,27 @@
 				}
 
 				.mod_songlist {
-					width: 95%;
-					height: 100%;
-
-					li {
-						list-style: none;
-					}
+					width: 100%;
 
 					.songlist__header {
-						font-size: 14px;
-						position: relative;
+						font-size: 1.4rem;
+						display: flex;
+						flex-direction: row;
 						height: 5rem;
 						width: 100%;
-						display: block;
-						line-height: 5rem;
-						background: rgba(0, 0, 0, 0.01);
+						line-height: 50px;
+						color: var(--color-text);
+						opacity: 0.7;
 
-						li {
-							float: left;
-							opacity: 0.7;
-							color: var(--color-text);
+						.songlist__header_empty {
+							width: 6%;
+							height: 100%;
+							margin-left: 1rem;
 						}
-
 						.songlist__header_name {
-							width: 45%;
+							width: 39%;
 							height: 100%;
 							display: inline-block;
-							padding-left: 5rem;
 						}
 
 						.songlist__header_author {
@@ -173,20 +163,20 @@
 						}
 
 						.songlist__header_album {
-							width: 18%;
+							width: 17%;
 							height: 100%;
 							display: inline-block;
 						}
 
 						.songlist__header_time {
-							width: 8%;
+							width: 15%;
 							height: 100%;
+							text-align: end;
 						}
 					}
 
 					.songlist__list {
-						font-size: 14px;
-						height: 5rem;
+						font-size: 1.4rem;
 						width: 100%;
 						display: block;
 
@@ -194,24 +184,55 @@
 							width: 100%;
 							height: 5rem;
 							position: relative;
-							display: block;
-							line-height: 5rem;
+							display: flex;
+							line-height: 50px;
 							color: var(--color-text);
+							overflow: hidden;
+							border-radius: 1rem;
 
 							.songlist__number {
 								opacity: 0.7;
-								width: 34px;
+								width: 1%;
 								height: 100%;
-								position: absolute;
+								margin-left: 1rem;
+							}
+							.songlist__play {
+								width: 5%;
+								height: 100%;
+								opacity: 0;
+
+								.list_menu__item {
+									width: 4rem;
+									height: 4rem;
+									background-color: transparent;
+									display: block;
+
+									.list_menu__icon_play {
+										background: url('@/assets/icons/播放-blue.png') no-repeat center/cover;
+										width: 4rem;
+										height: 4rem;
+										display: inline-block;
+										margin-top: 0.5rem;
+										margin-left: 1.5rem;
+
+										&:active {
+											transform: scale(0.95);
+										}
+									}
+
+									&:hover {
+										transform: scale(1.05);
+									}
+								}
 							}
 
 							.songlist__songname {
-								width: 45%;
+								width: 39%;
 								height: 100%;
-								font-weight: 500;
-								float: left;
-								padding-left: 45px;
 								position: relative;
+								font-size: 1.8rem;
+								font-weight: 600;
+								user-select: none;
 
 								.songlist__songname_txt {
 									max-width: 72%;
@@ -225,56 +246,11 @@
 									font-size: 14px;
 									display: block;
 								}
-
-								.mod_list_menu {
-									width: 50%;
-									height: 100%;
-									margin-left: 200px;
-									opacity: 0;
-									z-index: 100;
-									position: absolute;
-									//right: -5rem;
-
-									.list_menu__item {
-										width: 40px;
-										height: 40px;
-										background-color: #fff;
-										display: block;
-										position: relative;
-										margin-left: 40px;
-										padding-top: 2.5px;
-										float: left;
-
-										.list_menu__icon_play {
-											background: url('@/assets/icons/播放\ \(1\).png') no-repeat center/cover;
-											width: 40px;
-											height: 40px;
-											display: inline-block;
-										}
-
-										.list_menu__icon_add {
-											background: url('@/assets/icons/添加.png') no-repeat center/cover;
-											width: 39px;
-											height: 39px;
-											display: inline-block;
-										}
-
-										&:active {
-											transform: scale(0.97);
-										}
-									}
-
-									.list_menu__add {
-										margin-left: 10px;
-									}
-								}
 							}
 
 							.songlist__artist {
 								width: 18%;
 								height: 100%;
-								float: left;
-								margin-left: 0.5rem;
 								overflow: hidden;
 								text-overflow: ellipsis;
 								white-space: nowrap;
@@ -283,18 +259,47 @@
 							.songlist__album {
 								width: 17%;
 								height: 100%;
-								float: left;
 								overflow: hidden;
 								text-overflow: ellipsis;
 								white-space: nowrap;
 							}
 
 							.songlist__time {
-								width: 11%;
+								width: 15%;
 								height: 100%;
-								float: left;
 								opacity: 0.7;
-								margin-left: 1.4rem;
+								text-align: end;
+							}
+
+							.songlist__add {
+								width: 4%;
+								height: 100%;
+								opacity: 0;
+
+								.list_menu__item {
+									width: 4rem;
+									height: 4rem;
+									background-color: transparent;
+									display: block;
+									position: relative;
+
+									.list_menu__icon_add {
+										background: url('@/assets/icons/添加-blue.png') no-repeat center/cover;
+										width: 4rem;
+										height: 4rem;
+										display: inline-block;
+										margin-top: 0.5rem;
+										margin-left: 1rem;
+
+										&:active {
+											transform: scale(0.95);
+										}
+									}
+
+									&:hover {
+										transform: scale(1.05);
+									}
+								}
 							}
 
 							a {
@@ -307,8 +312,13 @@
 							}
 
 							&:hover {
-								.mod_list_menu {
+								background-color: var(--color-secondary-bg-for-transparent);
+								transition: background-color 0.3s ease-in;
+
+								.songlist__add,
+								.songlist__play {
 									opacity: 1;
+									transition: opacity 0.3s ease-in;
 								}
 							}
 						}
@@ -317,9 +327,7 @@
 			}
 
 			.album {
-				width: 80%;
-				margin: 0 auto;
-
+				width: 100%;
 				.title {
 					font-size: 1.4rem;
 					color: var(--color-text);
@@ -328,20 +336,16 @@
 			}
 
 			.artist {
-				width: 80%;
-				margin: 0 auto;
-
+				width: 100%;
 				.title {
 					font-size: 1.4rem;
 					color: var(--color-text);
-					margin: 2rem 0 0 3rem;
+					margin: 2rem 0 3rem 3rem;
 				}
 			}
 
 			.playlist {
-				width: 80%;
-				margin: 0 auto;
-
+				width: 100%;
 				.title {
 					font-size: 1.4rem;
 					color: var(--color-text);
@@ -350,9 +354,7 @@
 			}
 
 			.mv {
-				width: 80%;
-				margin: 0 auto;
-
+				width: 100%;
 				.title {
 					font-size: 1.4rem;
 					color: var(--color-text);

@@ -63,6 +63,7 @@ const SongListDetail: React.FC = () => {
 			squareItems.push(
 				Object.freeze({
 					id: item.id,
+					type: 'songlist',
 					name: item.name,
 					picUrl: item.coverImgUrl,
 					routerPath: '/songlistDetail',
@@ -97,6 +98,14 @@ const SongListDetail: React.FC = () => {
 
 	const playSong = (item: SongInfo) => {
 		dispatch({ type: 'playSong', val: item });
+	};
+
+	const playAllSong = (songs: SongInfo[]): void => {
+		dispatch({ type: 'updatePlayList', val: songs });
+	};
+
+	const addToPlaylist = (song: SongInfo) => {
+		dispatch({ type: 'addToPlayList', val: song });
 	};
 
 	return (
@@ -144,7 +153,7 @@ const SongListDetail: React.FC = () => {
 						</div>
 
 						<div className={styles.data_actions}>
-							<a className={styles.mod_btn_green}>
+							<a className={styles.mod_btn_green} onClick={() => playAllSong(trackInfos)}>
 								<i className={styles.mod_btn_green__icon_play}></i>
 								<span>播放全部</span>
 							</a>
@@ -202,6 +211,7 @@ const SongListDetail: React.FC = () => {
 													<a
 														className={`${styles.list_menu__item} ${styles.list_menu__add}`}
 														title={`${t('songItem.add')}`}
+														onClick={() => addToPlaylist(item)}
 													>
 														<i className={styles.list_menu__icon_add}></i>
 													</a>

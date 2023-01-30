@@ -18,7 +18,6 @@ import { changeAppearance } from '@/utils/common';
 
 import styles from './style.module.scss';
 import ContextMenu from '../ContextMenu';
-import loginIcon from '@/assets/icons/login.svg';
 
 const Header: React.FC = () => {
 	const location = useLocation();
@@ -33,12 +32,10 @@ const Header: React.FC = () => {
 		isLogin: state.handleUser.isLogin,
 	}));
 
-	// 处理 input 的 onFocus 事件
 	const focusHandler = () => {
 		setInputFocus(true);
 	};
 
-	// 处理 input 的 onBlur 事件
 	const blurHandler = () => {
 		setInputFocus(false);
 	};
@@ -91,8 +88,8 @@ const Header: React.FC = () => {
 		if (e.key === 'Enter') {
 			dispatch({ type: 'updateKeyword', val: keyWord });
 			navigateTo(`/search/${keyWord}`);
+			e.preventDefault();
 		}
-		e.preventDefault();
 	};
 
 	return (

@@ -197,7 +197,7 @@
 					.mod_btn {
 						border-radius: 0.8rem;
 						font-size: 14px;
-						padding: 0 23px;
+						padding: 0 10px;
 						height: 38px;
 						line-height: 38px;
 						display: inline-block;
@@ -209,21 +209,30 @@
 						margin-right: 10px;
 
 						.mod_btn__icon_like {
-							background: url('@/assets/icons/添加.png') no-repeat center/cover;
-							float: left;
 							width: 25px;
 							height: 25px;
+							float: left;
+							position: relative;
 							margin-top: 5px;
 							margin-right: 4px;
-						}
 
-						.mod_btn__icon_commend {
-							background: url('@/assets/icons/评论.png') no-repeat center/cover;
-							float: left;
-							width: 25px;
-							height: 25px;
-							margin-top: 6px;
-							margin-right: 4px;
+							.mod_btn__icon_like1 {
+								background: var(--color-text);
+								position: absolute;
+								width: 80%;
+								height: 2px;
+								left: 0;
+								top: 50%;
+							}
+							.mod_btn__icon_like2 {
+								background: var(--color-text);
+								width: 80%;
+								height: 2px;
+								position: absolute;
+								left: 0;
+								top: 50%;
+								transform: rotateZ(-90deg);
+							}
 						}
 
 						&:hover {

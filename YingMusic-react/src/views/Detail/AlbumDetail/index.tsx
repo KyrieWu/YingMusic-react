@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import { Modal } from 'antd';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -18,6 +19,7 @@ interface AltumDetailResult {
 const AlbumDetail: React.FC = () => {
 	const { t } = useTranslation();
 	const navigateTo = useNavigate();
+	const dispatch = useDispatch();
 	const { id } = useParams();
 	const [albumInfo, setAlbumInfo] = useState({} as AlbumInfo);
 	const [trackInfos, setTrackInfos] = useState<SongInfo[]>([]);
@@ -53,6 +55,18 @@ const AlbumDetail: React.FC = () => {
 
 	const handleCancel = () => {
 		setIsModalOpen(false);
+	};
+
+	const playSong = (item: SongInfo) => {
+		dispatch({ type: 'playSong', val: item });
+	};
+
+	const playAllSong = (songs: SongInfo[]): void => {
+		dispatch({ type: 'updatePlayList', val: songs });
+	};
+
+	const addToPlaylist = (song: SongInfo) => {
+		dispatch({ type: 'addToPlayList', val: song });
 	};
 
 	return (
@@ -99,7 +113,7 @@ const AlbumDetail: React.FC = () => {
 							</div>
 						</div>
 						<div className={styles.data_actions}>
-							<a className={styles.mod_btn_green}>
+							<a className={styles.mod_btn_green} onClick={() => playAllSong(trackInfos)}>
 								<i className={styles.mod_btn_green__icon_play}></i>
 								<span>播放全部</span>
 							</a>
@@ -129,6 +143,7 @@ const AlbumDetail: React.FC = () => {
 													<a
 														className={`${styles.list_menu__item} ${styles.list_menu__play}`}
 														title={`${t('songItem.play')}`}
+														onClick={() => playSong(item)}
 													>
 														<i className={styles.list_menu__icon_play}></i>
 													</a>
@@ -150,6 +165,7 @@ const AlbumDetail: React.FC = () => {
 													<a
 														className={`${styles.list_menu__item} ${styles.list_menu__add}`}
 														title={`${t('songItem.add')}`}
+														onClick={() => addToPlaylist(item)}
 													>
 														<i className={styles.list_menu__icon_add}></i>
 													</a>

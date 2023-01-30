@@ -56,6 +56,7 @@ const AllAlbum: React.FC = () => {
 			squareArr.push(
 				Object.freeze({
 					id: item.id,
+					type: 'album',
 					picUrl: item.picUrl,
 					name: item.name,
 					artistId: item.artist.id,

@@ -1,5 +1,6 @@
 interface SquareItemProps {
 	id: number;
+	type: string
 	picUrl: string;
 	name: string;
 	artistId?: number;

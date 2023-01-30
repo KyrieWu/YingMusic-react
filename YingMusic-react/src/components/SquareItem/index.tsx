@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { timestampToDate } from '@/utils/fonmatDate';
-
+import { useDispatch } from 'react-redux';
 import styles from './style.module.scss';
 import { Link } from 'react-router-dom';
+import { getAltumDetail, getPlayListTrack, getSongListInfo } from '@/apis';
 
-// interface AltumDetail {
-//     album: AlbumInfo,
-//     code: number
-//     resourceState: boolean
-//     songs: SongInfo[]
-//   }
+interface AltumDetail {
+	album: AlbumInfo;
+	code: number;
+	resourceState: boolean;
+	songs: SongInfo[];
+}
 
 type Props = {
 	squareItems: SquareItemProps[];
@@ -17,10 +18,33 @@ type Props = {
 
 const SquareItem: React.FC<Props> = (props: Props) => {
 	const { squareItems } = props;
+	const dispatch = useDispatch();
 
 	const getImageUrl = (item: any) => {
 		let img = item.img1v1Url || item.picUrl || item.coverImgUrl;
 		return `${img?.replace('http://', 'https://')}?param=512y512`;
+	};
+
+	const playAllSong = async (item: SquareItemProps) => {
+		let trackInfos: SongInfo[] = [];
+		switch (item.type) {
+			case 'songlist':
+				let playlistRes = await getSongListInfo(item.id);
+				trackInfos = playlistRes.playlist.tracks;
+				break;
+			case 'album':
+				let albumRes = (await getAltumDetail(item.id)) as unknown as AltumDetail;
+				trackInfos = albumRes.songs;
+				break;
+			case 'toplist':
+				const result = await getPlayListTrack(item.id, 50);
+				trackInfos = result.songs;
+				break;
+			default:
+				break;
+		}
+
+		dispatch({ type: 'updatePlayList', val: trackInfos });
 	};
 
 	return (
@@ -29,7 +53,7 @@ const SquareItem: React.FC<Props> = (props: Props) => {
 				return (
 					<div className={styles.item} key={index}>
 						<div className={styles.play}>
-							<div className={styles.playIcon}>
+							<div className={styles.playIcon} onClick={() => playAllSong(item)}>
 								<img src="https://y.qq.com/ryqq/static/media/cover_play@2x.53a26efb.png?max_age=2592000" alt="cover" />
 							</div>
 							<div className={styles.img}>

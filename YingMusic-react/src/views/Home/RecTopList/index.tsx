@@ -7,9 +7,7 @@ import styles from './style.module.scss';
 
 const RecTopList = () => {
 	const { t } = useTranslation();
-	const [topMusicList, setTopMusicList] = useState<Map<string, SongInfo[]>>(new Map());
 	const [squareItems, setSquareItems] = useState<SquareItemProps[]>([]);
-	const [topListInfo, setTopListInfo] = useState<TopListInfo[]>([]);
 
 	useEffect(() => {
 		getTopMusicList();
@@ -23,6 +21,7 @@ const RecTopList = () => {
 			squareItems.push(
 				Object.freeze({
 					id: item.id,
+					type: 'toplist',
 					picUrl: item.coverImgUrl,
 					name: item.name,
 				})
@@ -30,15 +29,6 @@ const RecTopList = () => {
 		});
 
 		setSquareItems(squareItems);
-	};
-
-	const playAllMusic = async () => {
-		const topMusicList: Map<string, SongInfo[]> = new Map();
-		for (let i = 0; i < topListInfo.length; i++) {
-			const result = await getPlayListTrack(topListInfo[i].id, 20);
-			topMusicList.set(topListInfo[i].name, result.songs);
-		}
-		setTopMusicList(topMusicList);
 	};
 
 	return (

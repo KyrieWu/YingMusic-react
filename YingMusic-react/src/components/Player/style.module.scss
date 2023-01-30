@@ -135,8 +135,12 @@
 			user-select: none;
 
 			.play_name {
-				flex: 1;
+				flex: 2;
 				padding-left: 4px;
+				display: block;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
 			}
 
 			.play_time {
